@@ -10,9 +10,9 @@
     else{
       //正式機
       define('HOST','localhost');	
-      define('DB_NAME','forestwe_paramount'); 
-      define('DB_USER', 'forestwe_turking');
-      define('DB_PASSWORD', 'Gjes86077');
+      define('DB_NAME',''); 
+      define('DB_USER', '');
+      define('DB_PASSWORD', '');
     }
     date_default_timezone_set("Asia/Taipei");
     header("Content-Type:text/html; charset=utf-8");
