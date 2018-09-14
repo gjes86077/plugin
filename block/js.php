@@ -4,14 +4,11 @@
     <script src="plug/jquery.min.js"></script>
     <!-- Bootstrap -->
     <script src="plug/bootstrap/dist/js/bootstrap.js"></script>
-    <!-- FastClick -->
-    <script src="plug/fastclick/lib/fastclick.js"></script>
-    <!-- NProgress -->
-    <script src="plug/nprogress/nprogress.js"></script>
+
     <!-- bootstrap-progressbar -->
-    <script src="plug/bootstrap-progressbar/bootstrap-progressbar.min.js"></script>
+    <!-- <script src="plug/bootstrap-progressbar/bootstrap-progressbar.min.js"></script> -->
     <!-- iCheck -->
-    <script src="plug/iCheck/icheck.min.js"></script>
+    <!-- <script src="plug/iCheck/icheck.min.js"></script> -->
     <!-- bootstrap-daterangepicker -->
     <script src="plug/moment/min/moment.min.js"></script>
     <!-- <script src="plug/bootstrap-daterangepicker/daterangepicker.js"></script> -->
@@ -19,23 +16,36 @@
     <!-- bootstrap-wysiwyg -->
     <script src="plug/bootstrap-wysiwyg/js/bootstrap-wysiwyg.min.js"></script>
     <script src="plug/jquery.hotkeys/jquery.hotkeys.js"></script>
-    <script src="plug/google-code-prettify/src/prettify.js"></script>
+
     <!-- jQuery Tags Input -->
     <script src="plug/jquery.tagsinput/src/jquery.tagsinput.js"></script>
     <!-- Switchery -->
-    <script src="plug/switchery/dist/switchery.min.js"></script>
-    <!-- Select2 -->
-    <script src="plug/select2/dist/js/select2.full.min.js"></script>
+    <!-- <script src="plug/switchery/dist/switchery.min.js"></script> -->
+
     <!-- Parsley -->
     <script src="plug/parsleyjs/dist/parsley.min.js"></script>
     <!-- Autosize -->
     <script src="plug/autosize/dist/autosize.min.js"></script>
     <!-- jQuery autocomplete -->
     <script src="plug/devbridge-autocomplete/dist/jquery.autocomplete.min.js"></script>
-    <!-- starrr -->
-    <script src="plug/starrr/dist/starrr.js"></script>
+
     <!-- Pagination. -->
-    <script src="plug/pagination/pagination.min.js"></script>
+    <!-- <script src="plug/pagination/pagination.min.js"></script> -->
+    <!-- Datatables -->
+    <script src="plug/datatables.net/js/jquery.dataTables.min.js"></script>
+    <script src="plug/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+    <script src="plug/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
+    <script src="plug/datatables.net-buttons-bs/js/buttons.bootstrap.min.js"></script>
+    <script src="plug/datatables.net-buttons/js/buttons.flash.min.js"></script>
+    <script src="plug/datatables.net-buttons/js/buttons.html5.min.js"></script>
+    <script src="plug/datatables.net-buttons/js/buttons.print.min.js"></script>
+    <script src="plug/datatables.net-fixedheader/js/dataTables.fixedHeader.min.js"></script>
+    <script src="plug/datatables.net-keytable/js/dataTables.keyTable.min.js"></script>
+    <script src="plug/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
+    <script src="plug/datatables.net-responsive-bs/js/responsive.bootstrap.js"></script>
+    <script src="plug/datatables.net-scroller/js/dataTables.scroller.min.js"></script>
+
+    
     <!-- Custom Theme Scripts -->
     <script src="system/js/custom.min.js"></script>
     <script>
