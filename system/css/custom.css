@@ -71,7 +71,8 @@ input[type="checkbox"] + label,input[type="radio"] + label {
 html , body{height:100%;}
 .login_content h1,body,h1,h2,h3,p,div{font-family: "Helvetica Neue", Roboto,  'Noto Sans TC',Arial, "Droid Sans", sans-serif;}
 .nav-md .site_title {content:url('../../img/forest-logo.svg')}
-.table>tbody>tr>td{line-height: 34px;vertical-align: center}
+.table>tbody>tr>td{line-height: 20px;vertical-align: middle}
+.table>tbody>tr>td.center,.table>tbody>tr>td.center{text-align: center}
 .nav-sm .site_title {content:url('../../img/forest-logo-s.svg')}
 .site_title img{width: 100%}
 .site_title{padding: 10px 15px}

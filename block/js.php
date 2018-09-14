@@ -48,7 +48,39 @@
     
     <!-- Custom Theme Scripts -->
     <script src="system/js/custom.min.js"></script>
+    
     <script>
+    $('#datalist').DataTable(
+        {  language: {
+          "decimal":        "",
+          "emptyTable":     "No data available in table",
+          "info":           "顯示第 _START_ 至 _END_ 筆資料，共 _TOTAL_ 筆",
+          "infoEmpty":      "顯示 0 to 0 of 0 entries",
+          "infoFiltered":   "(filtered from _MAX_ total entries)", 
+          "infoPostFix":    "",
+          "thousands":      ",",
+          "lengthMenu":     "顯示 _MENU_ 筆資料",
+          "loadingRecords": "讀取中...",
+          "processing":     "處理中...",
+          "search":         "搜尋:",
+          "zeroRecords":    "查無資料",
+          "paginate": {
+              "first":      "第一頁",
+              "last":       "最後",
+              "next":       ">",
+              "previous":   "<"
+          },
+          "aria": {
+              "sortAscending":  ": activate to sort column ascending",
+              "sortDescending": ": activate to sort column descending"
+          }
+      }}
+      );
+      $('.insert-btn').on('mouseenter,mouseleave',function(e){
+        console.log('test');
+        $(this).toggleClass('animates')
+        
+      })
     function preview(input,n) {
         if (input.files && input.files[0]) {
             var reader = new FileReader();
