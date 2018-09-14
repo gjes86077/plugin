@@ -4,6 +4,7 @@
     HEADER('Location:login.php');
   $title="網站設定";
   $result=SelectNCondition($link,'inf');
+  $res=$result[0];
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -56,84 +57,64 @@
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="title">網站名稱 <span class="required">*</span>
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input id="title" class="form-control col-md-7 col-xs-12 "  name="title" placeholder="網站名稱" required="required" type="text" value="<?=$result[0]['title']?>">
+                          <input id="title" class="form-control col-md-7 col-xs-12 "  name="title" placeholder="網站名稱" required="required" type="text" value="<?=$res['title']?>">
                           <input id="update_profile" name="update_profile" type="hidden" value="update_profile">
+                        </div>
+                      </div>
+                      <div class="item form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="facebook">Facebook粉絲團連結 <span class="required">*</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <input id="facebook" class="form-control col-md-7 col-xs-12 "  name="facebook" placeholder="Facebook粉絲團連結" required="required" type="text" value="<?=$res['facebook']?>">
                         </div>
                       </div>
                       <div class="item form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="youtube_channel">Youtube頻道連結 <span class="required">*</span>
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input id="youtube_channel" class="form-control col-md-7 col-xs-12 "  name="youtube_channel" placeholder="Youtube頻道連結" required="required" type="text" value="<?=$result[0]['youtube_channel']?>">
+                          <input id="youtube_channel" class="form-control col-md-7 col-xs-12 "  name="youtube_channel" placeholder="Youtube頻道連結" required="required" type="text" value="<?=$res['youtube_channel']?>">
                         </div>
                       </div>
-                      <div class="item form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="paramount_tel">統領電話 <span class="required">*</span>
-                        </label>
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input id="paramount_tel" class="form-control col-md-7 col-xs-12 "  name="paramount_tel" placeholder="統領電話" required="required" type="text" value="<?=$result[0]['paramount_tel']?>">
-                        </div>
-                      </div>
-                      <div class="item form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="paramount_mail">統領信箱 <span class="required">*</span>
-                        </label>
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input id="paramount_mail" class="form-control col-md-7 col-xs-12 "  name="paramount_mail" placeholder="統領信箱" required="required" type="text" value="<?=$result[0]['paramount_mail']?>">
-                        </div>
-                      </div>
-                      <div class="item form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="pacific_tel">統利電話 <span class="required">*</span>
-                        </label>
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input id="pacific_tel" class="form-control col-md-7 col-xs-12 "  name="pacific_tel" placeholder="統利電話" required="required" type="text" value="<?=$result[0]['pacific_tel']?>">
-                        </div>
-                      </div>
-                      <div class="item form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="pacific_mail">統利信箱 <span class="required">*</span>
-                        </label>
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input id="pacific_mail" class="form-control col-md-7 col-xs-12 "  name="pacific_mail" placeholder="統利信箱" required="required" type="text" value="<?=$result[0]['pacific_mail']?>">
-                        </div>
-                      </div>
+                    
 
                       <div class="item form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="address">聯絡地址 <span class="required">*</span>
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input id="address" class="form-control col-md-7 col-xs-12 "  name="address" placeholder="聯絡地址" required="required" type="text" value="<?=$result[0]['address']?>">
+                          <input id="address" class="form-control col-md-7 col-xs-12 "  name="address" placeholder="聯絡地址" required="required" type="text" value="<?=$res['address']?>">
                         </div>
                       </div>
                       <div class="item form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="location">地理座標 <span class="required">*</span>
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input id="location" class="form-control col-md-7 col-xs-12 "  name="location" placeholder="地理座標" required="required" type="text" value="<?=$result[0]['lat'].','.$result[0]['lng']?>">
+                          <input id="location" class="form-control col-md-7 col-xs-12 "  name="location" placeholder="地理座標" required="required" type="text" value="<?=$res['lat'].','.$res['lng']?>">
                         </div>
                       </div>
                       <div class="item form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="service">服務時間 <span class="required">*</span>
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input id="service" class="form-control col-md-7 col-xs-12 "  name="service" placeholder="服務時間" required="required" type="text" value="<?=$result[0]['service']?>">
+                          <input id="service" class="form-control col-md-7 col-xs-12 "  name="service" placeholder="服務時間" required="required" type="text" value="<?=$res['service']?>">
                         </div>
                       </div>
                       <!-- SEO設定 -->
                       <div class="item form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="keyword">網站關鍵字</label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <textarea id="keyword" name="keyword" class="form-control col-md-7 col-xs-12"><?=$result[0]['keyword']?></textarea>
+                          <textarea id="keyword" name="keyword" class="form-control col-md-7 col-xs-12"><?=$res['keyword']?></textarea>
                         </div>
                       </div>
                       <div class="item form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="desc">網站描述</label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <textarea id="desc"  name="desc" class="form-control col-md-7 col-xs-12"><?=$result[0]['desc']?></textarea>
+                          <textarea id="desc"  name="desc" class="form-control col-md-7 col-xs-12"><?=$res['desc']?></textarea>
                         </div>
                       </div>
                       <div class="item form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="ga">GA指令碼</label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <textarea id="ga"  name="ga" class="form-control col-md-7 col-xs-12"><?=$result[0]['ga']?></textarea>
+                          <textarea id="ga"  name="ga" class="form-control col-md-7 col-xs-12"><?=$res['ga']?></textarea>
                         </div>
                       </div>
                       <div class="ln_solid"></div>

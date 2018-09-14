@@ -3,7 +3,7 @@
     if($_SERVER[SERVER_NAME]=='localhost'||$_SERVER[SERVER_NAME]=='127.0.0.1'){
       //本機端測試
       define('HOST','localhost');	
-      define('DB_NAME','paramount'); 
+      define('DB_NAME','*****'); 
       define('DB_USER', 'root');
       define('DB_PASSWORD', '');
     }

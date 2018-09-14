@@ -30,7 +30,7 @@ input[type=file]{
           <?side(MessageCount($link));?>
         </div>
         <!-- top navigation -->
-         <?top_nav($link);?>
+        <?top_nav($link);?>
         <!-- /top navigation -->
         <!-- page content -->
         <div class="right_col" role="main">

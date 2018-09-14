@@ -1,7 +1,7 @@
 <?
 	$DIR='../system/config.php';
 	include_once $DIR ;
-	$key = array('title' , 'paramount_tel' , 'paramount_mail' , 'pacific_tel' , 'pacific_mail' , 'address' ,'youtube_channel', 'location' , 'service' , 'keyword' , 'desc' , 'ga'  );
+	$key = array('title' ,  'address' ,'youtube_channel', 'location' , 'service' , 'keyword' , 'desc' , 'ga'  );
 	$p = CheckAll($_POST,$key);
 	if (isset($_POST['update_profile'])) {
 		$str = htmlspecialchars($p['ga'],ENT_QUOTES);
