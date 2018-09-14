@@ -137,7 +137,7 @@ function panel_menu(){
                 </li>
                <li class="">
                   <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                  '.ADMIN_LANG.'
+                  '.ADMIN_LANG=='zh-tw'?'繁體中文':'英文'.'
                     <span class=" fa fa-angle-down"></span>
                   </a>
                   
