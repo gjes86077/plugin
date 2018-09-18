@@ -76,23 +76,62 @@
           }
       }}
       );
-      $('.insert-btn').on('mouseenter,mouseleave',function(e){
+      $('.insert-btn').on('mouseenter',function(e){
         console.log('test');
-        $(this).toggleClass('animates')
-        
+        $(this).toggleClass('animated')
       })
-    function preview(input,n) {
+    $("#edit").on("change", ".upl", function() {
+      console.log('圖片變更');
+      
+        var input = this;
+        var PARENT = $(this).parents(".form-group");
         if (input.files && input.files[0]) {
-            var reader = new FileReader();
-            reader.onload = function (e) {
-                $('.preview'+n).attr('src', e.target.result);
-                var KB = format_float(e.total / 1024, 2);
-                $('.size'+n).text('檔案大小：' + KB + ' KB');
-                $('#size').val(KB+'KB');
-            } 
-            reader.readAsDataURL(input.files[0]);
+          var reader = new FileReader();
+          reader.onload = function(e) {
+            var image = PARENT.find(".preview1");
+
+            switch (image.data("event")) {
+              case "cropper":
+                image.data("status", "modify");
+                var width = 0,
+                  height = 0;
+                width = image.data("width");
+                height = image.data("height");
+                image
+                  .cropper("destroy")
+                  .attr("src", e.target.result)
+                  .cropper({
+                    viewMode: 2,
+                    aspectRatio: width / height
+                  });
+                break;
+              default:
+                image.attr("src", e.target.result);
+                break;
+            }
+            var KB = format_float(e.total / 1024, 2);
+          };
+          reader.readAsDataURL(input.files[0]);
         }
-    }
+      });
+      $("#form_id").submit(function(e) {
+      // e.preventDefault();
+      if (confirm("確認變更？")) {
+        $(".preview1").each(function(index) {
+          if (
+            $(this).data("event") == "cropper" &&
+            $(this).data("status") == "modify"
+          ) {
+            var cropcanvas = $(this).cropper("getCroppedCanvas");
+            var croppng = cropcanvas.toDataURL("image/png");
+            $(this).prev().val(croppng);
+            console.log(croppng);
+          }
+        });
+      } else {
+        return false;
+      }
+    });
     function format_float(num, pos)
     {
         var size = Math.pow(10, pos);

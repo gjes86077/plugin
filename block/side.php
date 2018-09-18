@@ -98,6 +98,7 @@ function panel_menu(){
               <div class="clearfix"></div>';
     }
     function footer(){
+      
       echo '
  <!-- footer content -->
   <footer>
@@ -114,6 +115,7 @@ function panel_menu(){
    }
    function top_nav($link){
             session_start();
+            $_SESSION[admin_lang_chinese]=$_SESSION[admin_lang]=='zh-tw'?'繁體中文':'英文';
             $result=SelectUnread($link);
             echo '<div class="top_nav">
           <div class="nav_menu">
@@ -137,7 +139,7 @@ function panel_menu(){
                 </li>
                <li class="">
                   <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                  '.ADMIN_LANG=='zh-tw'?'繁體中文':'英文'.'
+                  '.$_SESSION[admin_lang_chinese].'
                     <span class=" fa fa-angle-down"></span>
                   </a>
                   
