@@ -1,4 +1,13 @@
 <? 
+//栽圖
+function wrap_img($file_data,$file_path="../../upload/",$file_name){   
+    ini_set("memory_limit","100M");
+    $file_name = $file_name.".png";
+    $img = str_replace('data:image/png;base64,', '', $file_data);
+    $img = str_replace(' ', '+', $img);
+    $data = base64_decode($img);
+    file_put_contents($file_path.$file_name, $data);
+}
 //取得Youtube ID
 function video_id($url)
 {
@@ -20,7 +29,6 @@ function video_id($url)
 }
 function fileimg($filesKey_key,$db_name,$path="../../upload/",$img="img"){
     $post=$_POST;
-    
     $filesKey   = array($filesKey_key);
     $filesArray   = $_FILES;
     if(!checkConvey($filesArray, $filesKey)){

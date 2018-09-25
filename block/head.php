@@ -11,12 +11,15 @@
 <link href="plug/font-awesome/css/font-awesome.min.css" rel="stylesheet">
 <!-- NProgress -->
 <!-- <link href="plug/nprogress/nprogress.css" rel="stylesheet"> -->
+<!-- animate -->
+<link href="plug/animate.css/animate.min.css" rel="stylesheet">
+<!-- Datatables -->
+<link href="plug/datatables.net-bs/css/dataTables.bootstrap.min.css" rel="stylesheet">
+<link href="plug/datatables.net-buttons-bs/css/buttons.bootstrap.min.css" rel="stylesheet">
+<link href="plug/datatables.net-fixedheader-bs/css/fixedHeader.bootstrap.min.css" rel="stylesheet">
+<link href="plug/datatables.net-responsive-bs/css/responsive.bootstrap.min.css" rel="stylesheet">
+<link href="plug/datatables.net-scroller-bs/css/scroller.bootstrap.min.css" rel="stylesheet">
+<!-- Cropper -->
+<link href="plug/cropper/dist/cropper.css" rel="stylesheet">
 <!-- Custom Theme Style -->
 <link href="system/css/custom.css" rel="stylesheet">
-
-  <!-- Datatables -->
-  <link href="plug/datatables.net-bs/css/dataTables.bootstrap.min.css" rel="stylesheet">
-  <link href="plug/datatables.net-buttons-bs/css/buttons.bootstrap.min.css" rel="stylesheet">
-  <link href="plug/datatables.net-fixedheader-bs/css/fixedHeader.bootstrap.min.css" rel="stylesheet">
-  <link href="plug/datatables.net-responsive-bs/css/responsive.bootstrap.min.css" rel="stylesheet">
-  <link href="plug/datatables.net-scroller-bs/css/scroller.bootstrap.min.css" rel="stylesheet">
