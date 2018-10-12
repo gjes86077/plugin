@@ -39,7 +39,6 @@ input[type=file]{
               <div class="title_left">
                 <h3></h3>
               </div>
-              
             </div>
             <div class="clearfix"></div>
             <div class="row">

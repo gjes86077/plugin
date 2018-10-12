@@ -27,22 +27,17 @@
     <link href="plug/pnotify/pnotify.custom.min.css" rel="stylesheet">
     <!-- Custom Theme Style -->
     <link href="system/css/custom.css" rel="stylesheet">
-
     
   </head>
-
   <body class="login">
     <div>
       <a class="hiddenanchor" id="signup"></a>
       <a class="hiddenanchor" id="signin"></a>
-
       <div class="login_wrapper">
         <div class="animate form login_form">
           <section class="login_content">
             <form method="post" id="status">
               <h1 style="line-height: 80px"><?=WEB_TITLE?></h1>
-
-
               	<a href="http://forestwebs.com.tw/" target="_blank"><img src="img/forest-logo-dark.png" style="width:calc( 100%  - 150px);margin-top: -60px"></a>
               
               <div ></div>
@@ -54,15 +49,11 @@
               </div>
               <div>
                   <a class="btn btn-default submit" href="javascript:login()">Log in</a>
-
               </div>
-
               <div class="clearfix"></div>
-
               <div class="separator">
                 <div class="clearfix"></div>
                 <br />
-
                 <div>
                   
                   <p>©2017 <a href="http://forestwebs.com.tw/" target="_blank">森德網站設計</a>Design All Rights Reserved.</p>
@@ -118,8 +109,6 @@
           }else if(result == "11"){
             opts.text = "帳號已鎖定，請聯絡網站管理員!!";
             new PNotify(opts);
-
-
           }else if(result == "12"){
             opts.text = "別在玩了！！！";
             new PNotify(opts);
@@ -135,9 +124,6 @@
         }
       );
         } 
-
-
-
    
     opts.title = "Oh No";
         opts.text = "Watch out for that water tower!";

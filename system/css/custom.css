@@ -41,7 +41,6 @@
 .paginationjs-pages > ul > li:hover a {
   color: #fff;
 }
-
 input[type="file"].upl {
   opacity: 0;
   position: absolute;
@@ -95,7 +94,6 @@ input[type="radio"]:checked + label:before {
    input[type="checkbox"].hidden_check:checked + label:before {
         content: "將文章發佈於首頁";
       }*/
-
 html,
 body {
   height: 100%;
@@ -141,7 +139,6 @@ div {
 html[dir="ltr"] {
   font-family: "Playfair Display", serif;
 }
-
 .full-height {
   height: 100%;
 }
@@ -4372,7 +4369,6 @@ ul.notifications {
 table thead .checkbox { margin-top:-7px;margin-top:-21px; }
 table thead .checkbox.radio { margin-top:-7px;margin-top:-21px; }
 */
-
 .daterangepicker.xdisplay {
   width: 228px;
 }

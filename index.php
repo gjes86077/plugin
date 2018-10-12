@@ -36,7 +36,6 @@
     <link href="plug/starrr/dist/starrr.css" rel="stylesheet">
     <!-- bootstrap-daterangepicker -->
     <link href="plug/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet">
-
     <!-- Custom Theme Style -->
     <link href="system/css/custom.css" rel="stylesheet">
     <?require_once  "block/side.php";?>
@@ -48,7 +47,6 @@
     .content{padding: 30px}
     </style>
   </head>
-
   <body class="nav-md footer_fixed">
     <div class="container body">
       <div class="main_container">
@@ -77,13 +75,11 @@
           </div>
         </div>
         <!-- /page content -->
-
         <!-- footer content -->
         <?footer();?>
         <!-- /footer content -->
       </div>
     </div>
-
     <!-- jQuery -->
     <script src="plug/CKEdit/ckeditor/ckeditor.js"></script>
     <!-- jQuery -->
@@ -122,10 +118,7 @@
     <!-- Custom Theme Scripts -->
     <script src="system/js/custom.min.js"></script>
     <script>
-
-
     </script>	
   
   </body>
-
 </html>

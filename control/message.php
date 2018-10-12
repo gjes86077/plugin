@@ -20,7 +20,6 @@ require_once realpath(dirname(__FILE__) . '/../') . '/system/config.php';
 		
 		$tableName		= "contact";
 		$result = Select1Condition($link, $tableName, 'id',$id);
-
 		echo json_encode($result);
 	}
 	function delete($link){
@@ -57,11 +56,9 @@ require_once realpath(dirname(__FILE__) . '/../') . '/system/config.php';
 		if($post['send_to']!='' & isset($post['send_to'])){
 		    $subject = WEB_TITLE."回覆訊息 ".date("Y-m-d H:i"); //信件標題
 		    
-
 		    //信件內容
 		    $Headers = "Content-type: text/html; charset=utf-8\r\n"."From: ".WEB_TITLE."<no-reply@turking.idv.tw>\r\n";
 		    $send=mail($post['send_to'], "$subject", $post['content'],$Headers);
-
 		    if ($send) {
 		    	 echo "<script>alert('成功寄出')</script>";
 		    	 backPrevPage();
@@ -76,9 +73,7 @@ require_once realpath(dirname(__FILE__) . '/../') . '/system/config.php';
 		  else
 		  	echo "<script>alert('寄出失敗')</script>";
 	}
-
 	if (isset($_GET["action"]) && function_exists($_GET["action"])) {
-
 		$action = $_GET["action"];
 		$type=$_POST["type"];
 		$action($link,$type);
@@ -86,5 +81,4 @@ require_once realpath(dirname(__FILE__) . '/../') . '/system/config.php';
 		echo "NO!NO!NO!";
 		exit();
 	}
-
 ?>

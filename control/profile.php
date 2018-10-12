@@ -15,10 +15,6 @@
 		$loc=split(",",$p['location']);
 		$new=UpdateById($link, 'inf',array(
 				"youtube_channel" => $p['youtube_channel'],
-				"paramount_tel" => $p['paramount_tel'],
-				"paramount_mail" => $p['paramount_mail'],
-				"pacific_tel" => $p['pacific_tel'],
-				"pacific_mail" => $p['pacific_mail'],
 				"address" => $p['address'],
 				"service" => $p['service'],
 				"lat" => $loc[0],

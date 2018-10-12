@@ -13,7 +13,6 @@
   $control_file='message.php';
 ?><!DOCTYPE html>
 <html lang="en">
-
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <!-- Meta, title, CSS, favicons, etc. -->
@@ -31,23 +30,19 @@
     <link href="plug/iCheck/skins/flat/green.css" rel="stylesheet">
     <!-- bootstrap-progressbar -->
     <link href="plug/bootstrap-progressbar/css/bootstrap-progressbar-3.3.4.min.css" rel="stylesheet">
-
     <style>.msg_list img{width: 100%}.time{float: right;}</style>
     <!-- Custom Theme Style -->
     <link href="system/css/custom.css" rel="stylesheet">
   </head>
-
   <body class="nav-md footer_fixed">
     <div class="container body">
       <div class="main_container">
         <div class="col-md-3 left_col ">
         <?side(MessageCount($link));?>
         </div>
-
         <!-- top navigation -->
         <?top_nav($link);?>
         <!-- /top navigation -->
-
         <!-- page content -->
         <div class="right_col" role="main">
           <div class="">
@@ -56,12 +51,8 @@
                 <h3>官網留言訊息</h3>
               </div>              
             </div>
-
-
             <!-- End to do list -->
             <div class="col-xs-12">
-
-
               <!-- 信件編輯區塊 -->
                <div class="x_panel " id="edit">
                   <div class="x_title">
@@ -84,7 +75,6 @@
                           </div>
                         </div>
                       </div>
-
                       <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="content">信件內容<span class="required">*</span>
                         </label>
@@ -103,14 +93,10 @@
                         </div>
                       </div>
                     </form>
-
                   </div>
                 </div>
               
-
                 <!-- 信件編輯區塊 -->
-
-
               <div class="x_panel" id="list">
                 <div class="x_title">
                   <h2>訊息瀏覽 </h2>
@@ -119,7 +105,6 @@
                 </div>
                 <div class="x_content">
                   <ul class="list-unstyled msg_list">
-
                     <?php foreach ($result as $mes): 
                        $label=$mes['read']==0?'<span class="label label-danger">未讀</span>':'';
                     ?>                
@@ -139,7 +124,6 @@
                             </div>
                           </div>
                         </div> 
-
                         <div class="col-md-9 col-xs-12">
                           <span class="time"><?=$label?><?=CheckTime($mes['crt_date'])?></span>
                           <p class="message">
@@ -151,7 +135,6 @@
                         </div> 
                     </li>
                     <?php endforeach ?>
-
                   </ul>
                 </div>
               </div>
@@ -164,11 +147,9 @@
           <div class="clearfix"></div>
         </div>
         <!-- /page content -->
-
         <?footer()?>
       </div>
     </div>
-
     <div id="custom_notifications" class="custom-notifications dsp_none">
       <ul class="list-unstyled notifications clearfix" data-tabbed_notifications="notif-group">
       </ul>
@@ -189,11 +170,8 @@
     <script src="plug/bootstrap-progressbar/bootstrap-progressbar.min.js"></script>
     <!-- iCheck -->
     <script src="plug/iCheck/icheck.min.js"></script>
-
-
     <!-- Custom Theme Scripts -->
     <script src="system/js/custom.min.js"></script>
-
     <script>
       $('#edit').hide();
       function list() {
@@ -204,7 +182,6 @@
         var SRC_URL = "upload/";
         // $('#edit').fadeIn();
         // $('#list').fadeOut();
-
         $('#edit').removeClass("fadeOutRight ").addClass('fadeInRight').show();
         $("#list").removeClass("fadeInLeft ").addClass('fadeOutLeft').hide();
         $("#edit small").html("");

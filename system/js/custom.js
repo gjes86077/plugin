@@ -11,7 +11,6 @@
     // http://unscriptable.com/index.php/2009/03/20/debouncing-javascript-methods/
     var debounce = function (func, threshold, execAsap) {
       var timeout;
-
         return function debounced () {
             var obj = this, args = arguments;
             function delayed () {
@@ -19,26 +18,21 @@
                     func.apply(obj, args); 
                 timeout = null; 
             }
-
             if (timeout)
                 clearTimeout(timeout);
             else if (execAsap)
                 func.apply(obj, args);
-
             timeout = setTimeout(delayed, threshold || 100); 
         };
     };
-
     // smartresize 
     jQuery.fn[sr] = function(fn){  return fn ? this.bind('resize', debounce(fn)) : this.trigger(sr); };
-
 })(jQuery,'smartresize');
 /**
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 var CURRENT_URL = window.location.href.split('#')[0].split('?')[0],
     $BODY = $('body'),
     $MENU_TOGGLE = $('#menu_toggle'),
@@ -48,7 +42,6 @@ var CURRENT_URL = window.location.href.split('#')[0].split('?')[0],
     $RIGHT_COL = $('.right_col'),
     $NAV_MENU = $('.nav_menu'),
     $FOOTER = $('footer');
-
 	
 	
 // Sidebar
@@ -57,22 +50,17 @@ function init_sidebar() {
 var setContentHeight = function () {
 	// reset height
 	$RIGHT_COL.css('min-height', $(window).height());
-
 	var bodyHeight = $BODY.outerHeight(),
 		footerHeight = $BODY.hasClass('footer_fixed') ? -10 : $FOOTER.height(),
 		leftColHeight = $LEFT_COL.eq(1).height() + $SIDEBAR_FOOTER.height(),
 		contentHeight = bodyHeight < leftColHeight ? leftColHeight : bodyHeight;
-
 	// normalize content
 	contentHeight -= $NAV_MENU.height() + footerHeight;
-
 	$RIGHT_COL.css('min-height', contentHeight);
 };
-
   $SIDEBAR_MENU.find('a').on('click', function(ev) {
 	  console.log('clicked - sidebar_menu');
         var $li = $(this).parent();
-
         if ($li.is('.active')) {
             $li.removeClass('active active-sm');
             $('ul:first', $li).slideUp(function() {
@@ -92,13 +80,11 @@ var setContentHeight = function () {
 				}
 			}
             $li.addClass('active');
-
             $('ul:first', $li).slideDown(function() {
                 setContentHeight();
             });
         }
     });
-
 // toggle small or large menu 
 $MENU_TOGGLE.on('click', function() {
 		console.log('clicked - menu toggle');
@@ -110,30 +96,22 @@ $MENU_TOGGLE.on('click', function() {
 			$SIDEBAR_MENU.find('li.active-sm ul').show();
 			$SIDEBAR_MENU.find('li.active-sm').addClass('active').removeClass('active-sm');
 		}
-
 	$BODY.toggleClass('nav-md nav-sm');
-
 	setContentHeight();
-
 	$('.dataTable').each ( function () { $(this).dataTable().fnDraw(); });
 });
-
 	// check active menu
 	$SIDEBAR_MENU.find('a[href="' + CURRENT_URL + '"]').parent('li').addClass('current-page');
-
 	$SIDEBAR_MENU.find('a').filter(function () {
 		return this.href == CURRENT_URL;
 	}).parent('li').addClass('current-page').parents('ul').slideDown(function() {
 		setContentHeight();
 	}).parent().addClass('active');
-
 	// recompute content when resizing
 	$(window).smartresize(function(){  
 		setContentHeight();
 	});
-
 	setContentHeight();
-
 	// fixed sidebar
 	if ($.fn.mCustomScrollbar) {
 		$('.menu_fixed').mCustomScrollbar({
@@ -144,12 +122,9 @@ $MENU_TOGGLE.on('click', function() {
 	}
 };
 // /Sidebar
-
 	var randNum = function() {
 	  return (Math.floor(Math.random() * (1 + 40 - 20))) + 20;
 	};
-
-
 // Panel toolbox
 $(document).ready(function() {
     $('.collapse-link').on('click', function() {
@@ -166,18 +141,14 @@ $(document).ready(function() {
             $BOX_CONTENT.slideToggle(200); 
             $BOX_PANEL.css('height', 'auto');  
         }
-
         $ICON.toggleClass('fa-chevron-up fa-chevron-down');
     });
-
     $('.close-link').click(function () {
         var $BOX_PANEL = $(this).closest('.x_panel');
-
         $BOX_PANEL.remove();
     });
 });
 // /Panel toolbox
-
 // Tooltip
 $(document).ready(function() {
     $('[data-toggle="tooltip"]').tooltip({
@@ -185,13 +156,11 @@ $(document).ready(function() {
     });
 });
 // /Tooltip
-
 // Progressbar
 if ($(".progress .progress-bar")[0]) {
     $('.progress .progress-bar').progressbar();
 }
 // /Progressbar
-
 // Switchery
 $(document).ready(function() {
     if ($(".js-switch")[0]) {
@@ -204,8 +173,6 @@ $(document).ready(function() {
     }
 });
 // /Switchery
-
-
 // iCheck
 $(document).ready(function() {
     if ($("input.flat")[0]) {
@@ -218,7 +185,6 @@ $(document).ready(function() {
     }
 });
 // /iCheck
-
 // Table
 $('table input').on('ifChecked', function () {
     checkState = '';
@@ -230,9 +196,7 @@ $('table input').on('ifUnchecked', function () {
     $(this).parent().parent().parent().removeClass('selected');
     countChecked();
 });
-
 var checkState = '';
-
 $('.bulk_action input').on('ifChecked', function () {
     checkState = '';
     $(this).parent().parent().parent().addClass('selected');
@@ -251,7 +215,6 @@ $('.bulk_action input#check-all').on('ifUnchecked', function () {
     checkState = 'none';
     countChecked();
 });
-
 function countChecked() {
     if (checkState === 'all') {
         $(".bulk_action input[name='table_records']").iCheck('check');
@@ -259,9 +222,7 @@ function countChecked() {
     if (checkState === 'none') {
         $(".bulk_action input[name='table_records']").iCheck('uncheck');
     }
-
     var checkCount = $(".bulk_action input[name='table_records']:checked").length;
-
     if (checkCount) {
         $('.column-title').hide();
         $('.bulk-actions').show();
@@ -271,15 +232,11 @@ function countChecked() {
         $('.bulk-actions').hide();
     }
 }
-
-
-
 // Accordion
 $(document).ready(function() {
     $(".expand").on("click", function () {
         $(this).next().slideToggle(200);
         $expand = $(this).find(">:first-child");
-
         if ($expand.text() == "+") {
             $expand.text("-");
         } else {
@@ -287,18 +244,15 @@ $(document).ready(function() {
         }
     });
 });
-
 // NProgress
 if (typeof NProgress != 'undefined') {
     $(document).ready(function () {
         NProgress.start();
     });
-
     $(window).load(function () {
         NProgress.done();
     });
 }
-
 	
 	  //hover and retain popover when on popover content
         var originalLeave = $.fn.popover.Constructor.prototype.leave;
@@ -306,9 +260,7 @@ if (typeof NProgress != 'undefined') {
           var self = obj instanceof this.constructor ?
             obj : $(obj.currentTarget)[this.type](this.getDelegateOptions()).data('bs.' + this.type);
           var container, timeout;
-
           originalLeave.call(this, obj);
-
           if (obj.currentTarget) {
             container = $(obj.currentTarget).siblings('.popover');
             timeout = self.timeout;
@@ -322,7 +274,6 @@ if (typeof NProgress != 'undefined') {
             });
           }
         };
-
         $('body').popover({
           selector: '[data-popover]',
           trigger: 'click hover',
@@ -331,8 +282,6 @@ if (typeof NProgress != 'undefined') {
             hide: 400
           }
         });
-
-
 	function gd(year, month, day) {
 		return new Date(year, month - 1, day).getTime();
 	}
@@ -355,7 +304,6 @@ if (typeof NProgress != 'undefined') {
 			[gd(2012, 1, 6), 85],
 			[gd(2012, 1, 7), 7]
 		];
-
 		var arr_data2 = [
 		  [gd(2012, 1, 1), 82],
 		  [gd(2012, 1, 2), 23],
@@ -598,15 +546,12 @@ if (typeof NProgress != 'undefined') {
 		console.log('init_starrr');
 		
 		$(".stars").starrr();
-
 		$('.stars-existing').starrr({
 		  rating: 4
 		});
-
 		$('.stars').on('starrr:change', function (e, value) {
 		  $('.stars-count').html(value);
 		});
-
 		$('.stars-existing').on('starrr:change', function (e, value) {
 		  $('.stars-count-existing').html(value);
 		});
@@ -615,7 +560,6 @@ if (typeof NProgress != 'undefined') {
 	
 	
 	function init_JQVmap(){
-
 		//console.log('check init_JQVmap [' + typeof (VectorCanvas) + '][' + typeof (jQuery.fn.vectorMap) + ']' );	
 		
 		if(typeof (jQuery.fn.vectorMap) === 'undefined'){ return; }
@@ -673,10 +617,8 @@ if (typeof NProgress != 'undefined') {
 				"fog"
 			  ],
 			  i;
-
 			for (i = list.length; i--;)
 			  icons.set(list[i], list[i]);
-
 			icons.play();
 	
 	}  
@@ -744,7 +686,6 @@ if (typeof NProgress != 'undefined') {
 		
 		console.log('init_gauge');
 		
-
 		  var chart_gauge_settings = {
 		  lines: 12,
 		  angle: 0,
@@ -912,7 +853,6 @@ if (typeof NProgress != 'undefined') {
 				lineColor: '#26B99A',
 				width: '85',
 			});
-
 			
 		};   
 	   
@@ -925,14 +865,12 @@ if (typeof NProgress != 'undefined') {
 			console.log('init_autocomplete');
 			
 			var countries = { AD:"Andorra",A2:"Andorra Test",AE:"United Arab Emirates",AF:"Afghanistan",AG:"Antigua and Barbuda",AI:"Anguilla",AL:"Albania",AM:"Armenia",AN:"Netherlands Antilles",AO:"Angola",AQ:"Antarctica",AR:"Argentina",AS:"American Samoa",AT:"Austria",AU:"Australia",AW:"Aruba",AX:"Åland Islands",AZ:"Azerbaijan",BA:"Bosnia and Herzegovina",BB:"Barbados",BD:"Bangladesh",BE:"Belgium",BF:"Burkina Faso",BG:"Bulgaria",BH:"Bahrain",BI:"Burundi",BJ:"Benin",BL:"Saint Barthélemy",BM:"Bermuda",BN:"Brunei",BO:"Bolivia",BQ:"British Antarctic Territory",BR:"Brazil",BS:"Bahamas",BT:"Bhutan",BV:"Bouvet Island",BW:"Botswana",BY:"Belarus",BZ:"Belize",CA:"Canada",CC:"Cocos [Keeling] Islands",CD:"Congo - Kinshasa",CF:"Central African Republic",CG:"Congo - Brazzaville",CH:"Switzerland",CI:"Côte d’Ivoire",CK:"Cook Islands",CL:"Chile",CM:"Cameroon",CN:"China",CO:"Colombia",CR:"Costa Rica",CS:"Serbia and Montenegro",CT:"Canton and Enderbury Islands",CU:"Cuba",CV:"Cape Verde",CX:"Christmas Island",CY:"Cyprus",CZ:"Czech Republic",DD:"East Germany",DE:"Germany",DJ:"Djibouti",DK:"Denmark",DM:"Dominica",DO:"Dominican Republic",DZ:"Algeria",EC:"Ecuador",EE:"Estonia",EG:"Egypt",EH:"Western Sahara",ER:"Eritrea",ES:"Spain",ET:"Ethiopia",FI:"Finland",FJ:"Fiji",FK:"Falkland Islands",FM:"Micronesia",FO:"Faroe Islands",FQ:"French Southern and Antarctic Territories",FR:"France",FX:"Metropolitan France",GA:"Gabon",GB:"United Kingdom",GD:"Grenada",GE:"Georgia",GF:"French Guiana",GG:"Guernsey",GH:"Ghana",GI:"Gibraltar",GL:"Greenland",GM:"Gambia",GN:"Guinea",GP:"Guadeloupe",GQ:"Equatorial Guinea",GR:"Greece",GS:"South Georgia and the South Sandwich Islands",GT:"Guatemala",GU:"Guam",GW:"Guinea-Bissau",GY:"Guyana",HK:"Hong Kong SAR China",HM:"Heard Island and McDonald Islands",HN:"Honduras",HR:"Croatia",HT:"Haiti",HU:"Hungary",ID:"Indonesia",IE:"Ireland",IL:"Israel",IM:"Isle of Man",IN:"India",IO:"British Indian Ocean Territory",IQ:"Iraq",IR:"Iran",IS:"Iceland",IT:"Italy",JE:"Jersey",JM:"Jamaica",JO:"Jordan",JP:"Japan",JT:"Johnston Island",KE:"Kenya",KG:"Kyrgyzstan",KH:"Cambodia",KI:"Kiribati",KM:"Comoros",KN:"Saint Kitts and Nevis",KP:"North Korea",KR:"South Korea",KW:"Kuwait",KY:"Cayman Islands",KZ:"Kazakhstan",LA:"Laos",LB:"Lebanon",LC:"Saint Lucia",LI:"Liechtenstein",LK:"Sri Lanka",LR:"Liberia",LS:"Lesotho",LT:"Lithuania",LU:"Luxembourg",LV:"Latvia",LY:"Libya",MA:"Morocco",MC:"Monaco",MD:"Moldova",ME:"Montenegro",MF:"Saint Martin",MG:"Madagascar",MH:"Marshall Islands",MI:"Midway Islands",MK:"Macedonia",ML:"Mali",MM:"Myanmar [Burma]",MN:"Mongolia",MO:"Macau SAR China",MP:"Northern Mariana Islands",MQ:"Martinique",MR:"Mauritania",MS:"Montserrat",MT:"Malta",MU:"Mauritius",MV:"Maldives",MW:"Malawi",MX:"Mexico",MY:"Malaysia",MZ:"Mozambique",NA:"Namibia",NC:"New Caledonia",NE:"Niger",NF:"Norfolk Island",NG:"Nigeria",NI:"Nicaragua",NL:"Netherlands",NO:"Norway",NP:"Nepal",NQ:"Dronning Maud Land",NR:"Nauru",NT:"Neutral Zone",NU:"Niue",NZ:"New Zealand",OM:"Oman",PA:"Panama",PC:"Pacific Islands Trust Territory",PE:"Peru",PF:"French Polynesia",PG:"Papua New Guinea",PH:"Philippines",PK:"Pakistan",PL:"Poland",PM:"Saint Pierre and Miquelon",PN:"Pitcairn Islands",PR:"Puerto Rico",PS:"Palestinian Territories",PT:"Portugal",PU:"U.S. Miscellaneous Pacific Islands",PW:"Palau",PY:"Paraguay",PZ:"Panama Canal Zone",QA:"Qatar",RE:"Réunion",RO:"Romania",RS:"Serbia",RU:"Russia",RW:"Rwanda",SA:"Saudi Arabia",SB:"Solomon Islands",SC:"Seychelles",SD:"Sudan",SE:"Sweden",SG:"Singapore",SH:"Saint Helena",SI:"Slovenia",SJ:"Svalbard and Jan Mayen",SK:"Slovakia",SL:"Sierra Leone",SM:"San Marino",SN:"Senegal",SO:"Somalia",SR:"Suriname",ST:"São Tomé and Príncipe",SU:"Union of Soviet Socialist Republics",SV:"El Salvador",SY:"Syria",SZ:"Swaziland",TC:"Turks and Caicos Islands",TD:"Chad",TF:"French Southern Territories",TG:"Togo",TH:"Thailand",TJ:"Tajikistan",TK:"Tokelau",TL:"Timor-Leste",TM:"Turkmenistan",TN:"Tunisia",TO:"Tonga",TR:"Turkey",TT:"Trinidad and Tobago",TV:"Tuvalu",TW:"Taiwan",TZ:"Tanzania",UA:"Ukraine",UG:"Uganda",UM:"U.S. Minor Outlying Islands",US:"United States",UY:"Uruguay",UZ:"Uzbekistan",VA:"Vatican City",VC:"Saint Vincent and the Grenadines",VD:"North Vietnam",VE:"Venezuela",VG:"British Virgin Islands",VI:"U.S. Virgin Islands",VN:"Vietnam",VU:"Vanuatu",WF:"Wallis and Futuna",WK:"Wake Island",WS:"Samoa",YD:"People's Democratic Republic of Yemen",YE:"Yemen",YT:"Mayotte",ZA:"South Africa",ZM:"Zambia",ZW:"Zimbabwe",ZZ:"Unknown or Invalid Region" };
-
 			var countriesArray = $.map(countries, function(value, key) {
 			  return {
 				value: value,
 				data: key
 			  };
 			});
-
 			// initialize autocomplete with custom appendTo
 			$('#autocomplete-custom-append').autocomplete({
 			  lookup: countriesArray
@@ -1005,15 +943,12 @@ if (typeof NProgress != 'undefined') {
 			function onAddTag(tag) {
 				alert("Added a tag: " + tag);
 			  }
-
 			  function onRemoveTag(tag) {
 				alert("Removed a tag: " + tag);
 			  }
-
 			  function onChangeTag(input, tag) {
 				alert("Changed a tag: " + tag);
 			  }
-
 			  //tags input
 			function init_TagsInput() {
 				  
@@ -1048,7 +983,6 @@ if (typeof NProgress != 'undefined') {
 		};
 	   
 	   /* WYSIWYG EDITOR */
-
 		function init_wysiwyg() {
 			
 		if( typeof ($.fn.wysiwyg) === 'undefined'){ return; }
@@ -1076,16 +1010,13 @@ if (typeof NProgress != 'undefined') {
               this.value = '';
               $(this).change();
             });
-
           $('[data-role=magic-overlay]').each(function() {
             var overlay = $(this),
               target = $(overlay.data('target'));
             overlay.css('opacity', 0).css('position', 'absolute').offset(target.offset()).width(target.outerWidth()).height(target.outerHeight());
           });
-
           if ("onwebkitspeechchange" in document.createElement("input")) {
             var editorOffset = $('#editor').offset();
-
             $('.voiceBtn').css('position', 'absolute').offset({
               top: editorOffset.top,
               left: editorOffset.left + $('#editor').innerWidth() - 35
@@ -1094,7 +1025,6 @@ if (typeof NProgress != 'undefined') {
             $('.voiceBtn').hide();
           }
         }
-
         function showErrorAlert(reason, detail) {
           var msg = '';
           if (reason === 'unsupported-file-type') {
@@ -1105,7 +1035,6 @@ if (typeof NProgress != 'undefined') {
           $('<div class="alert"> <button type="button" class="close" data-dismiss="alert">&times;</button>' +
             '<strong>File upload error</strong> ' + msg + ' </div>').prependTo('#alerts');
         }
-
        $('.editor-wrapper').each(function(){
 			var id = $(this).attr('id');	//editor-one
 			
@@ -1151,12 +1080,8 @@ if (typeof NProgress != 'undefined') {
 					$dataScaleY.val(e.scaleY);
 				  }
 				};
-
-
 			// Tooltip
 			$('[data-toggle="tooltip"]').tooltip();
-
-
 			// Cropper
 			$image.on({
 			  'build.cropper': function (e) {
@@ -1181,25 +1106,18 @@ if (typeof NProgress != 'undefined') {
 				console.log(e.type, e.ratio);
 			  }
 			}).cropper(options);
-
-
 			// Buttons
 			if (!$.isFunction(document.createElement('canvas').getContext)) {
 			  $('button[data-method="getCroppedCanvas"]').prop('disabled', true);
 			}
-
 			if (typeof document.createElement('cropper').style.transition === 'undefined') {
 			  $('button[data-method="rotate"]').prop('disabled', true);
 			  $('button[data-method="scale"]').prop('disabled', true);
 			}
-
-
 			// Download
 			if (typeof $download[0].download === 'undefined') {
 			  $download.addClass('disabled');
 			}
-
-
 			// Options
 			$('.docs-toggles').on('change', 'input', function () {
 			  var $this = $(this);
@@ -1207,16 +1125,13 @@ if (typeof NProgress != 'undefined') {
 			  var type = $this.prop('type');
 			  var cropBoxData;
 			  var canvasData;
-
 			  if (!$image.data('cropper')) {
 				return;
 			  }
-
 			  if (type === 'checkbox') {
 				options[name] = $this.prop('checked');
 				cropBoxData = $image.cropper('getCropBoxData');
 				canvasData = $image.cropper('getCanvasData');
-
 				options.built = function () {
 				  $image.cropper('setCropBoxData', cropBoxData);
 				  $image.cropper('setCanvasData', canvasData);
@@ -1224,28 +1139,21 @@ if (typeof NProgress != 'undefined') {
 			  } else if (type === 'radio') {
 				options[name] = $this.val();
 			  }
-
 			  $image.cropper('destroy').cropper(options);
 			});
-
-
 			// Methods
 			$('.docs-buttons').on('click', '[data-method]', function () {
 			  var $this = $(this);
 			  var data = $this.data();
 			  var $target;
 			  var result;
-
 			  if ($this.prop('disabled') || $this.hasClass('disabled')) {
 				return;
 			  }
-
 			  if ($image.data('cropper') && data.method) {
 				data = $.extend({}, data); // Clone a new one
-
 				if (typeof data.target !== 'undefined') {
 				  $target = $(data.target);
-
 				  if (typeof data.option === 'undefined') {
 					try {
 					  data.option = JSON.parse($target.val());
@@ -1254,29 +1162,22 @@ if (typeof NProgress != 'undefined') {
 					}
 				  }
 				}
-
 				result = $image.cropper(data.method, data.option, data.secondOption);
-
 				switch (data.method) {
 				  case 'scaleX':
 				  case 'scaleY':
 					$(this).data('option', -data.option);
 					break;
-
 				  case 'getCroppedCanvas':
 					if (result) {
-
 					  // Bootstrap's Modal
 					  $('#getCroppedCanvasModal').modal().find('.modal-body').html(result);
-
 					  if (!$download.hasClass('disabled')) {
 						$download.attr('href', result.toDataURL());
 					  }
 					}
-
 					break;
 				}
-
 				if ($.isPlainObject(result) && $target) {
 				  try {
 					$target.val(JSON.stringify(result));
@@ -1284,60 +1185,48 @@ if (typeof NProgress != 'undefined') {
 					console.log(e.message);
 				  }
 				}
-
 			  }
 			});
-
 			// Keyboard
 			$(document.body).on('keydown', function (e) {
 			  if (!$image.data('cropper') || this.scrollTop > 300) {
 				return;
 			  }
-
 			  switch (e.which) {
 				case 37:
 				  e.preventDefault();
 				  $image.cropper('move', -1, 0);
 				  break;
-
 				case 38:
 				  e.preventDefault();
 				  $image.cropper('move', 0, -1);
 				  break;
-
 				case 39:
 				  e.preventDefault();
 				  $image.cropper('move', 1, 0);
 				  break;
-
 				case 40:
 				  e.preventDefault();
 				  $image.cropper('move', 0, 1);
 				  break;
 			  }
 			});
-
 			// Import image
 			var $inputImage = $('#inputImage');
 			var URL = window.URL || window.webkitURL;
 			var blobURL;
-
 			if (URL) {
 			  $inputImage.change(function () {
 				var files = this.files;
 				var file;
-
 				if (!$image.data('cropper')) {
 				  return;
 				}
-
 				if (files && files.length) {
 				  file = files[0];
-
 				  if (/^image\/\w+$/.test(file.type)) {
 					blobURL = URL.createObjectURL(file);
 					$image.one('built.cropper', function () {
-
 					  // Revoke when load complete
 					  URL.revokeObjectURL(blobURL);
 					}).cropper('reset').cropper('replace', blobURL);
@@ -1378,19 +1267,14 @@ if (typeof NProgress != 'undefined') {
 				   return value + '%';
 				   },*/
 				  draw: function() {
-
 					// "tron" case
 					if (this.$.data('skin') == 'tron') {
-
 					  this.cursorExt = 0.3;
-
 					  var a = this.arc(this.cv) // Arc
 						,
 						pa // Previous arc
 						, r = 1;
-
 					  this.g.lineWidth = this.lineWidth;
-
 					  if (this.o.displayPrevious) {
 						pa = this.arc(this.v);
 						this.g.beginPath();
@@ -1398,24 +1282,20 @@ if (typeof NProgress != 'undefined') {
 						this.g.arc(this.xy, this.xy, this.radius - this.lineWidth, pa.s, pa.e, pa.d);
 						this.g.stroke();
 					  }
-
 					  this.g.beginPath();
 					  this.g.strokeStyle = r ? this.o.fgColor : this.fgColor;
 					  this.g.arc(this.xy, this.xy, this.radius - this.lineWidth, a.s, a.e, a.d);
 					  this.g.stroke();
-
 					  this.g.lineWidth = 2;
 					  this.g.beginPath();
 					  this.g.strokeStyle = this.o.fgColor;
 					  this.g.arc(this.xy, this.xy, this.radius - this.lineWidth + 1 + this.lineWidth * 2 / 3, 0, 2 * Math.PI, false);
 					  this.g.stroke();
-
 					  return false;
 					}
 				  }
 				  
 				});
-
 				// Example of infinite knob, iPod click wheel
 				var v, up = 0,
 				  down = 0,
@@ -1482,16 +1362,13 @@ if (typeof NProgress != 'undefined') {
 			
 				$('.demo1').colorpicker();
 				$('.demo2').colorpicker();
-
 				$('#demo_forceformat').colorpicker({
 					format: 'rgba',
 					horizontal: true
 				});
-
 				$('#demo_forceformat3').colorpicker({
 					format: 'rgba',
 				});
-
 				$('.demo-auto').colorpicker();
 			
 		}; 
@@ -1571,7 +1448,6 @@ if (typeof NProgress != 'undefined') {
 	   /* DATERANGEPICKER */
 	   
 		function init_daterangepicker() {
-
 			if( typeof ($.fn.daterangepicker) === 'undefined'){ return; }
 			console.log('init_daterangepicker');
 		
@@ -1579,7 +1455,6 @@ if (typeof NProgress != 'undefined') {
 			  console.log(start.toISOString(), end.toISOString(), label);
 			  $('#reportrange span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
 			};
-
 			var optionSet1 = {
 			  startDate: moment().subtract(29, 'days'),
 			  endDate: moment(),
@@ -1654,7 +1529,6 @@ if (typeof NProgress != 'undefined') {
 				  console.log(start.toISOString(), end.toISOString(), label);
 				  $('#reportrange_right span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
 				};
-
 				var optionSet1 = {
 				  startDate: moment().subtract(29, 'days'),
 				  endDate: moment(),
@@ -1693,11 +1567,8 @@ if (typeof NProgress != 'undefined') {
 					firstDay: 1
 				  }
 				};
-
 				$('#reportrange_right span').html(moment().subtract(29, 'days').format('MMMM D, YYYY') + ' - ' + moment().format('MMMM D, YYYY'));
-
 				$('#reportrange_right').daterangepicker(optionSet1, cb);
-
 				$('#reportrange_right').on('show.daterangepicker', function() {
 				  console.log("show event fired");
 				});
@@ -1710,19 +1581,15 @@ if (typeof NProgress != 'undefined') {
 				$('#reportrange_right').on('cancel.daterangepicker', function(ev, picker) {
 				  console.log("cancel event fired");
 				});
-
 				$('#options1').click(function() {
 				  $('#reportrange_right').data('daterangepicker').setOptions(optionSet1, cb);
 				});
-
 				$('#options2').click(function() {
 				  $('#reportrange_right').data('daterangepicker').setOptions(optionSet2, cb);
 				});
-
 				$('#destroy').click(function() {
 				  $('#reportrange_right').data('daterangepicker').remove();
 				});
-
 	   }
 	   
 	    function init_daterangepicker_single_call() {
@@ -1767,7 +1634,6 @@ if (typeof NProgress != 'undefined') {
 			$('#reservation').daterangepicker(null, function(start, end, label) {
 			  console.log(start.toISOString(), end.toISOString(), label);
 			});
-
 			$('#reservation-time').daterangepicker({
 			  timePicker: true,
 			  timePickerIncrement: 30,
@@ -1786,11 +1652,9 @@ if (typeof NProgress != 'undefined') {
 			console.log('init_SmartWizard');
 			
 			$('#wizard').smartWizard();
-
 			$('#wizard_verticle').smartWizard({
 			  transitionEffect: 'slide'
 			});
-
 			$('.buttonNext').addClass('btn btn-success');
 			$('.buttonPrevious').addClass('btn btn-primary');
 			$('.buttonFinish').addClass('btn btn-default');
@@ -1799,7 +1663,6 @@ if (typeof NProgress != 'undefined') {
 	   
 	   
 	  /* VALIDATOR */
-
 	  function init_validator () {
 		 
 		if( typeof (validator) === 'undefined'){ return; }
@@ -1807,29 +1670,23 @@ if (typeof NProgress != 'undefined') {
 	  
 	  // initialize the validator function
       validator.message.date = 'not a real date';
-
       // validate a field on "blur" event, a 'select' on 'change' event & a '.reuired' classed multifield on 'keyup':
       $('form')
         .on('blur', 'input[required], input.optional, select.required', validator.checkField)
         .on('change', 'select.required', validator.checkField)
         .on('keypress', 'input[required][pattern]', validator.keypress);
-
       $('.multi.required').on('keyup blur', 'input', function() {
         validator.checkField.apply($(this).siblings().last()[0]);
       });
-
       $('form').submit(function(e) {
         e.preventDefault();
         var submit = true;
-
         // evaluate the form using generic validaing
         if (!validator.checkAll($(this))) {
           submit = false;
         }
-
         if (submit)
           this.submit();
-
         return false;
 		});
 	  
@@ -1857,13 +1714,10 @@ if (typeof NProgress != 'undefined') {
 				  title: PNotify.options.title + " - Enjoy your Stay",
 				  before_close: null
 				});
-
 				PNotify.queueRemove();
-
 				return false;
 			  }
 			});
-
 		}; 
 	   
 	   
@@ -1877,11 +1731,9 @@ if (typeof NProgress != 'undefined') {
 			console.log('init_CustomTabs');
 			
 			var cnt = 10;
-
 			TabbedNotification = function(options) {
 			  var message = "<div id='ntf" + cnt + "' class='text alert-" + options.type + "' style='display:none'><h2><i class='fa fa-bell'></i> " + options.title +
 				"</h2><div class='close'><a href='javascript:;' class='notification_close'><i class='fa fa-close'></i></a></div><p>" + options.text + "</p></div>";
-
 			  if (!document.getElementById('custom_notifications')) {
 				alert('doesnt exists');
 			  } else {
@@ -1891,7 +1743,6 @@ if (typeof NProgress != 'undefined') {
 				CustomTabs(options);
 			  }
 			};
-
 			CustomTabs = function(options) {
 			  $('.tabbed_notifications > div').hide();
 			  $('.tabbed_notifications > div:first-of-type').show();
@@ -1908,11 +1759,8 @@ if (typeof NProgress != 'undefined') {
 				$(target).show();
 			  });
 			};
-
 			CustomTabs();
-
 			var tabid = idname = '';
-
 			$(document).on('click', '.notification_close', function(e) {
 			  idname = $(this).parent().parent().attr("id");
 			  tabid = idname.substr(-2);
@@ -1948,16 +1796,13 @@ if (typeof NProgress != 'undefined') {
 				$('.js_update').on('click', function() {
 				  chart.update(Math.random() * 200 - 100);
 				});
-
 				//hover and retain popover when on popover content
 				var originalLeave = $.fn.popover.Constructor.prototype.leave;
 				$.fn.popover.Constructor.prototype.leave = function(obj) {
 				  var self = obj instanceof this.constructor ?
 					obj : $(obj.currentTarget)[this.type](this.getDelegateOptions()).data('bs.' + this.type);
 				  var container, timeout;
-
 				  originalLeave.call(this, obj);
-
 				  if (obj.currentTarget) {
 					container = $(obj.currentTarget).siblings('.popover');
 					timeout = self.timeout;
@@ -1971,7 +1816,6 @@ if (typeof NProgress != 'undefined') {
 					});
 				  }
 				};
-
 				$('body').popover({
 				  selector: '[data-popover]',
 				  trigger: 'click hover',
@@ -1998,7 +1842,6 @@ if (typeof NProgress != 'undefined') {
 				};
 				
 				
-
 			if ($('#canvas_line').length ){
 				
 				var canvas_line_00 = new Chart(document.getElementById("canvas_line"), {
@@ -2030,7 +1873,6 @@ if (typeof NProgress != 'undefined') {
 				});
 				
 			}
-
 			
 			if ($('#canvas_line1').length ){
 			
@@ -2094,7 +1936,6 @@ if (typeof NProgress != 'undefined') {
 					}]
 				  },
 				});
-
 			}	
 			
 			
@@ -2127,7 +1968,6 @@ if (typeof NProgress != 'undefined') {
 					}]
 				  },
 				});
-
 			}	
 			
 			
@@ -2218,7 +2058,6 @@ if (typeof NProgress != 'undefined') {
 					data: [41, 56, 25, 48, 72, 34, 12]
 				  }]
 				},
-
 				options: {
 				  scales: {
 					yAxes: [{
@@ -2232,7 +2071,6 @@ if (typeof NProgress != 'undefined') {
 			  
 			} 
 			  
-
 			  // Doughnut chart
 			  
 			if ($('#canvasDoughnut').length ){ 
@@ -2262,10 +2100,8 @@ if (typeof NProgress != 'undefined') {
 					"#36CAAB",
 					"#49A9EA"
 				  ]
-
 				}]
 			  };
-
 			  var canvasDoughnut = new Chart(ctx, {
 				type: 'doughnut',
 				tooltipFillColor: "rgba(51, 51, 51, 0.55)",
@@ -2273,7 +2109,6 @@ if (typeof NProgress != 'undefined') {
 			  });
 			 
 			} 
-
 			  // Radar chart
 			  
 			if ($('#canvasRadar').length ){ 
@@ -2301,7 +2136,6 @@ if (typeof NProgress != 'undefined') {
 				  data: [28, 48, 40, 19, 96, 27, 100]
 				}]
 			  };
-
 			  var canvasRadar = new Chart(ctx, {
 				type: 'radar',
 				data: data,
@@ -2334,7 +2168,6 @@ if (typeof NProgress != 'undefined') {
 					  "Blue"
 					]
 				  };
-
 				  var pieChart = new Chart(ctx, {
 					data: data,
 					type: 'pie',
@@ -2347,9 +2180,7 @@ if (typeof NProgress != 'undefined') {
 			
 			  
 			  // PolarArea chart
-
 			if ($('#polarArea').length ){
-
 				var ctx = document.getElementById("polarArea");
 				var data = {
 				datasets: [{
@@ -2371,7 +2202,6 @@ if (typeof NProgress != 'undefined') {
 				  "Blue"
 				]
 				};
-
 				var polarArea = new Chart(ctx, {
 				data: data,
 				type: 'polarArea',
@@ -2386,7 +2216,6 @@ if (typeof NProgress != 'undefined') {
 			
 			}
 		}
-
 		/* COMPOSE */
 		
 		function init_compose() {
@@ -2413,7 +2242,6 @@ if (typeof NProgress != 'undefined') {
 					y = date.getFullYear(),
 					started,
 					categoryClass;
-
 				var calendar = $('#calendar').fullCalendar({
 				  header: {
 					left: 'prev,next today',
@@ -2424,18 +2252,14 @@ if (typeof NProgress != 'undefined') {
 				  selectHelper: true,
 				  select: function(start, end, allDay) {
 					$('#fc_create').click();
-
 					started = start;
 					ended = end;
-
 					$(".antosubmit").on("click", function() {
 					  var title = $("#title").val();
 					  if (end) {
 						ended = end;
 					  }
-
 					  categoryClass = $("#event_type").val();
-
 					  if (title) {
 						calendar.fullCalendar('renderEvent', {
 							title: title,
@@ -2446,29 +2270,21 @@ if (typeof NProgress != 'undefined') {
 						  true // make the event "stick"
 						);
 					  }
-
 					  $('#title').val('');
-
 					  calendar.fullCalendar('unselect');
-
 					  $('.antoclose').click();
-
 					  return false;
 					});
 				  },
 				  eventClick: function(calEvent, jsEvent, view) {
 					$('#fc_edit').click();
 					$('#title2').val(calEvent.title);
-
 					categoryClass = $("#event_type").val();
-
 					$(".antosubmit2").on("click", function() {
 					  calEvent.title = $("#title2").val();
-
 					  calendar.fullCalendar('updateEvent', calEvent);
 					  $('.antoclose2').click();
 					});
-
 					calendar.fullCalendar('unselect');
 				  },
 				  editable: true,
@@ -2542,7 +2358,6 @@ if (typeof NProgress != 'undefined') {
 					});
 				  }
 				};
-
 				TableManageButtons = function() {
 				  "use strict";
 				  return {
@@ -2551,15 +2366,11 @@ if (typeof NProgress != 'undefined') {
 					}
 				  };
 				}();
-
 				$('#datatable').dataTable();
-
 				$('#datatable-keytable').DataTable({
 				  keys: true
 				});
-
 				$('#datatable-responsive').DataTable();
-
 				$('#datatable-scroller').DataTable({
 				  ajax: "js/datatables/json/scroller-demo.json",
 				  deferRender: true,
@@ -2567,13 +2378,10 @@ if (typeof NProgress != 'undefined') {
 				  scrollCollapse: true,
 				  scroller: true
 				});
-
 				$('#datatable-fixed-header').DataTable({
 				  fixedHeader: true
 				});
-
 				var $datatable = $('#datatable-checkbox');
-
 				$datatable.dataTable({
 				  'order': [[ 1, 'asc' ]],
 				  'columnDefs': [
@@ -2585,7 +2393,6 @@ if (typeof NProgress != 'undefined') {
 					checkboxClass: 'icheckbox_flat-green'
 				  });
 				});
-
 				TableManageButtons.init();
 				
 			};
@@ -2622,7 +2429,6 @@ if (typeof NProgress != 'undefined') {
 				  hideHover: 'auto',
 				  resize: true
 				});
-
 			}	
 			
 			if ($('#graph_bar_group').length ){
@@ -2649,7 +2455,6 @@ if (typeof NProgress != 'undefined') {
 				  xLabelAngle: 60,
 				  resize: true
 				});
-
 			}
 			
 			if ($('#graphx').length ){
@@ -2671,7 +2476,6 @@ if (typeof NProgress != 'undefined') {
 				}).on('click', function (i, row) {
 					console.log(i, row);
 				});
-
 			}
 			
 			if ($('#graph_area').length ){
@@ -2698,7 +2502,6 @@ if (typeof NProgress != 'undefined') {
 				  hideHover: 'auto',
 				  resize: true
 				});
-
 			}
 			
 			if ($('#graph_donut').length ){
@@ -2717,7 +2520,6 @@ if (typeof NProgress != 'undefined') {
 				  },
 				  resize: true
 				});
-
 			}
 			
 			if ($('#graph_line').length ){
@@ -2738,7 +2540,6 @@ if (typeof NProgress != 'undefined') {
 				  ],
 				  resize: true
 				});
-
 				$MENU_TOGGLE.on('click', function() {
 				  $(window).resize();
 				});
@@ -2763,7 +2564,6 @@ if (typeof NProgress != 'undefined') {
 					  '#26B99A', '#34495E', '#BDC3C7', '#3498DB',
 					  '#9B59B6', '#8abb6f', '#759c6a', '#bfd3b7'
 				  ],
-
 				  title: {
 					  itemGap: 8,
 					  textStyle: {
@@ -2771,15 +2571,12 @@ if (typeof NProgress != 'undefined') {
 						  color: '#408829'
 					  }
 				  },
-
 				  dataRange: {
 					  color: ['#1f610a', '#97b58d']
 				  },
-
 				  toolbox: {
 					  color: ['#408829', '#408829', '#408829', '#408829']
 				  },
-
 				  tooltip: {
 					  backgroundColor: 'rgba(0,0,0,0.5)',
 					  axisPointer: {
@@ -2796,7 +2593,6 @@ if (typeof NProgress != 'undefined') {
 						  }
 					  }
 				  },
-
 				  dataZoom: {
 					  dataBackgroundColor: '#eee',
 					  fillerColor: 'rgba(64,136,41,0.2)',
@@ -2805,7 +2601,6 @@ if (typeof NProgress != 'undefined') {
 				  grid: {
 					  borderWidth: 0
 				  },
-
 				  categoryAxis: {
 					  axisLine: {
 						  lineStyle: {
@@ -2818,7 +2613,6 @@ if (typeof NProgress != 'undefined') {
 						  }
 					  }
 				  },
-
 				  valueAxis: {
 					  axisLine: {
 						  lineStyle: {
@@ -2846,7 +2640,6 @@ if (typeof NProgress != 'undefined') {
 						  emphasis: {color: '#408829'}
 					  }
 				  },
-
 				  k: {
 					  itemStyle: {
 						  normal: {
@@ -2969,14 +2762,12 @@ if (typeof NProgress != 'undefined') {
 					  fontFamily: 'Arial, Verdana, sans-serif'
 				  }
 			  };
-
 			  
 			  //echart Bar
 			  
 			if ($('#mainb').length ){
 			  
 				  var echartBar = echarts.init(document.getElementById('mainb'), theme);
-
 				  echartBar.setOption({
 					title: {
 					  text: 'Graph title',
@@ -3043,7 +2834,6 @@ if (typeof NProgress != 'undefined') {
 					  }
 					}]
 				  });
-
 			}
 			  
 			  
@@ -3054,7 +2844,6 @@ if (typeof NProgress != 'undefined') {
 			if ($('#echart_sonar').length ){ 
 			  
 			  var echartRadar = echarts.init(document.getElementById('echart_sonar'), theme);
-
 			  echartRadar.setOption({
 				title: {
 				  text: 'Budget vs spending',
@@ -3116,7 +2905,6 @@ if (typeof NProgress != 'undefined') {
 				  }]
 				}]
 			  });
-
 			} 
 			  
 			   //echart Funnel
@@ -3124,7 +2912,6 @@ if (typeof NProgress != 'undefined') {
 			if ($('#echart_pyramid').length ){ 
 			  
 			  var echartFunnel = echarts.init(document.getElementById('echart_pyramid'), theme);
-
 			  echartFunnel.setOption({
 				title: {
 				  text: 'Echart Pyramid Graph',
@@ -3176,7 +2963,6 @@ if (typeof NProgress != 'undefined') {
 				  }]
 				}]
 			  });
-
 			} 
 			  
 			   //echart Gauge
@@ -3184,7 +2970,6 @@ if (typeof NProgress != 'undefined') {
 			if ($('#echart_gauge').length ){ 
 			  
 			  var echartGauge = echarts.init(document.getElementById('echart_gauge'), theme);
-
 			  echartGauge.setOption({
 				tooltip: {
 				  formatter: "{a} <br/>{b} : {c}%"
@@ -3296,7 +3081,6 @@ if (typeof NProgress != 'undefined') {
 				  }]
 				}]
 			  });
-
 			} 
 			  
 			   //echart Line
@@ -3304,7 +3088,6 @@ if (typeof NProgress != 'undefined') {
 			if ($('#echart_line').length ){ 
 			  
 			  var echartLine = echarts.init(document.getElementById('echart_line'), theme);
-
 			  echartLine.setOption({
 				title: {
 				  text: 'Line Graph',
@@ -3388,7 +3171,6 @@ if (typeof NProgress != 'undefined') {
 				  data: [1320, 1132, 601, 234, 120, 90, 20]
 				}]
 			  });
-
 			} 
 			  
 			   //echart Scatter
@@ -3396,7 +3178,6 @@ if (typeof NProgress != 'undefined') {
 			if ($('#echart_scatter').length ){ 
 			  
 			  var echartScatter = echarts.init(document.getElementById('echart_scatter'), theme);
-
 			  echartScatter.setOption({
 				title: {
 				  text: 'Scatter Graph',
@@ -4008,7 +3789,6 @@ if (typeof NProgress != 'undefined') {
 				  }
 				}]
 			  });
-
 			} 
 			  
 			   //echart Bar Horizontal
@@ -4016,7 +3796,6 @@ if (typeof NProgress != 'undefined') {
 			if ($('#echart_bar_horizontal').length ){ 
 			  
 			  var echartBar = echarts.init(document.getElementById('echart_bar_horizontal'), theme);
-
 			  echartBar.setOption({
 				title: {
 				  text: 'Bar Graph',
@@ -4057,7 +3836,6 @@ if (typeof NProgress != 'undefined') {
 				  data: [19325, 23438, 31000, 121594, 134141, 681807]
 				}]
 			  });
-
 			} 
 			  
 			   //echart Pie Collapse
@@ -4124,7 +3902,6 @@ if (typeof NProgress != 'undefined') {
 				  }]
 				}]
 			  });
-
 			} 
 			  
 			   //echart Donut
@@ -4211,7 +3988,6 @@ if (typeof NProgress != 'undefined') {
 				  }]
 				}]
 			  });
-
 			} 
 			  
 			   //echart Pie
@@ -4219,7 +3995,6 @@ if (typeof NProgress != 'undefined') {
 			if ($('#echart_pie').length ){  
 			  
 			  var echartPie = echarts.init(document.getElementById('echart_pie'), theme);
-
 			  echartPie.setOption({
 				tooltip: {
 				  trigger: 'item',
@@ -4279,7 +4054,6 @@ if (typeof NProgress != 'undefined') {
 				  }]
 				}]
 			  });
-
 			  var dataStyle = {
 				normal: {
 				  label: {
@@ -4290,7 +4064,6 @@ if (typeof NProgress != 'undefined') {
 				  }
 				}
 			  };
-
 			  var placeHolderStyle = {
 				normal: {
 				  color: 'rgba(0,0,0,0)',
@@ -4305,7 +4078,6 @@ if (typeof NProgress != 'undefined') {
 				  color: 'rgba(0,0,0,0)'
 				}
 			  };
-
 			} 
 			  
 			   //echart Mini Pie
@@ -4313,7 +4085,6 @@ if (typeof NProgress != 'undefined') {
 			if ($('#echart_mini_pie').length ){ 
 			  
 			  var echartMiniPie = echarts.init(document.getElementById('echart_mini_pie'), theme);
-
 			  echartMiniPie .setOption({
 				title: {
 				  text: 'Chart #2',
@@ -4410,7 +4181,6 @@ if (typeof NProgress != 'undefined') {
 				  }]
 				}]
 			  });
-
 			} 
 			  
 			   //echart Map
@@ -5066,4 +4836,3 @@ if (typeof NProgress != 'undefined') {
 				
 	});	
 	
-

@@ -76,7 +76,6 @@
                         </div>
                       </div>
                     
-
                       <div class="item form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="address">聯絡地址 <span class="required">*</span>
                         </label>
@@ -143,8 +142,6 @@
     <script src="plug/jquery.min.js"></script>
     <!-- Bootstrap -->
     <script src="plug/bootstrap/dist/js/bootstrap.js"></script>
-
-
     <!-- validator -->
     <script src="plug/validator/validator.js"></script>
     <!-- bootstrap-daterangepicker -->
@@ -153,7 +150,6 @@
     <!-- Custom Theme Scripts -->
     <script src="system/js/custom.min.js"></script>
     <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC6R-j6QUGy31AmQSwOMonQo-y7leSviBg"></script>
-
     <script>
     $(function(){
       $("#address").on("input",function(){
