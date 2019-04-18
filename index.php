@@ -75,6 +75,7 @@
           </div>
         </div>
         <!-- /page content -->
+
         <!-- footer content -->
         <?footer();?>
         <!-- /footer content -->
@@ -119,6 +120,5 @@
     <script src="system/js/custom.min.js"></script>
     <script>
     </script>	
-  
   </body>
 </html>

@@ -116,17 +116,14 @@
       // e.preventDefault()
       if (confirm("確認變更？")) {
         $(".preview").each(function(index) {
-          if (
-            $(this).data("event") == "cropper" &&
-            $(this).data("status") == "modify"
-          ) {
-            var cropcanvas = $(this).cropper("getCroppedCanvas")
-            var croppng = cropcanvas.toDataURL("image/png")
+          if ( $(this).data("event") == "cropper" && $(this).data("status") == "modify" ) {
+            var cropcanvas = $(this).cropper("getCroppedCanvas",{width:$(this).data("width"),height:$(this).data("height")})
+            var croppng = cropcanvas.toDataURL("image/png",0.5)
             $(this).prev().val(croppng)
             console.log(croppng)
           }
         })
-      } else {
+      }  else {
         return false
       }
     })

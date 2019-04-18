@@ -38,10 +38,10 @@
     <div class="container body">
       <div class="main_container">
         <div class="col-md-3 left_col ">
-        <?side(MessageCount($link));?>
+        <?side(MessageCount($link))?>
         </div>
         <!-- top navigation -->
-        <?top_nav($link);?>
+        <?top_nav($link)?>
         <!-- /top navigation -->
         <!-- page content -->
         <div class="right_col" role="main">
@@ -54,23 +54,23 @@
             <!-- End to do list -->
             <div class="col-xs-12">
               <!-- 信件編輯區塊 -->
-               <div class="x_panel " id="edit">
+              <div class="x_panel " id="edit">
                   <div class="x_title">
-                    <h2>回覆訊息<small></small></h2>
+                    <h2>回覆訊息
+                      <small></small>
+                    </h2>
                     <?panel_menu()?>
                   </div>
                   <div class="x_content">
                     <br />
                     <form id="form_id" data-parsley-validate class="form-horizontal form-label-left" method="post" enctype="multipart/form-data">
-                   
-                     
+
                       <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">文章置於首頁</label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
                           <div class="checkbox">
-                           
-                                <label class="form-control" id="send"></label>
-                             <input type="hidden" id="send_to" name="send_to" value="">
+                            <label class="form-control" id="send"></label>
+                              <input type="hidden" id="send_to" name="send_to" value="">
                             </label>
                           </div>
                         </div>

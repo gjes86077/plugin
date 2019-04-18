@@ -18,9 +18,7 @@
     <?require_once  "block/head.php";?>
     <?require_once  "block/side.php";?>
     <style>
-input[type=file]{
-  display: hidden;
-}
+      input[type=file]{ display: hidden;}
     </style>
   </head>
   <body class="nav-md footer_fixed">
