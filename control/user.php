@@ -39,7 +39,7 @@ $UPD=UpdateById($link,"inf",array('upd'=>date("Y-m-d H:m:s")),0);
     $id = checkSqlInjection($id);
     //移除HTML標籤
     $id = checkHtmlPhpTag($id);
-    $result = DeletById($link, 'user', 'id', $id);
+    $result = DeleteById($link, 'user', 'id', $id);
     
     if ($result) {
       backPrevPage();

@@ -1,6 +1,7 @@
 <?
 //SQL Select * 無條件
 function SelectCustom($link,$sql,$i=0){
+	
 	if ($i ==0) {		
 		$result = mysqli_query($link, $sql);		
 		$dataArray =array();

@@ -124,7 +124,8 @@ function CheckLogin($link,$account,$password){
 				$exceptionArray = explode(",",$exceptionString);
 				foreach($dataArray as $key=>$val){
 					if(!in_array($key, $exceptionArray)){
-						$val	= preg_replace('/<([^<>]*)>/', '&lt;\1&gt;', $val);
+						// $val	= preg_replace('/<([^<>]*)>/', '&lt;\1&gt;', $val);
+						$val=htmlspecialchars($val,ENT_QUOTES);
 						$val	= preg_replace('/[Jj][Aa][Vv][Aa][Ss][Cc][Rr][Ii][Pp][Tt]/', "", $val);
 						$dataArray[$key]	= $val ;
 					}
