@@ -1,6 +1,7 @@
 <?
 //SQL Select * 無條件
 function SelectCustom($link,$sql,$i=0){
+	
 	if ($i ==0) {		
 		$result = mysqli_query($link, $sql);		
 		$dataArray =array();
@@ -305,7 +306,7 @@ function UpdateCustom($link,$sql,$i=0){
 	}
 }
 //---刪除---//
-function DeletById($link, $table, $column='id', $condition,$i=0) {
+function DeleteById($link, $table, $column='id', $condition,$i=0) {
 	$sql="DELETE FROM `".$table."` WHERE $column = '$condition'";
 	if ($i == 0) {		
 		$result = mysqli_query($link, $sql);		
