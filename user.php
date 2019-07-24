@@ -18,9 +18,7 @@
     <?require_once  "block/head.php";?>
     <?require_once  "block/side.php";?>
     <style>
-input[type=file]{
-  display: hidden;
-}
+      input[type=file]{ display: hidden;}
     </style>
   </head>
   <body class="nav-md footer_fixed">
@@ -194,6 +192,24 @@ input[type=file]{
     <!-- Custom Theme Scripts -->
     <script src="system/js/custom.min.js"></script>
     <script>
+
+    $('#datatable').DataTable( {
+        "processing": true,
+        "serverSide": true,
+        "ajax": {
+            "url": "scripts/post.php",
+            "type": "POST"
+        },
+        "columns": [
+            { "data": "first_name" },
+            { "data": "last_name" },
+            { "data": "position" },
+            { "data": "office" },
+            { "data": "start_date" },
+            { "data": "salary" }
+        ]
+    } );
+
       function insert() {
         type = '<?=$_GET['type']?>';
         $("#id").val(id);

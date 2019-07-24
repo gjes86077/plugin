@@ -1,10 +1,10 @@
-<? 
-  require_once  "system/config.php";  
+<?php
+  require_once 'system/config.php';
   //已登入跳至首頁
-  if(checkAdmin()){
-    header("location:index.php");
-    exit();
-  }  
+  if (checkAdmin()) {
+      header('location:index.php');
+      exit();
+  }
 ?>
 <!DOCTYPE html>
 <html lang="zh-TW">
@@ -14,7 +14,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">	
-    <title>森德網站設計 | <?=WEB_TITLE?></title>
+    <title>森德網站設計 | <?=WEB_TITLE; ?></title>
     <!-- Bootstrap -->
     <link href="plug/bootstrap/dist/css/bootstrap.css" rel="stylesheet">
     <!-- Font Awesome -->
@@ -37,7 +37,7 @@
         <div class="animate form login_form">
           <section class="login_content">
             <form method="post" id="status">
-              <h1 style="line-height: 80px"><?=WEB_TITLE?></h1>
+              <h1 style="line-height: 80px"><?=WEB_TITLE; ?></h1>
               	<a href="http://forestwebs.com.tw/" target="_blank"><img src="img/forest-logo-dark.png" style="width:calc( 100%  - 150px);margin-top: -60px"></a>
               
               <div ></div>
@@ -64,10 +64,10 @@
         </div>
       </div>
     </div>
-<!-- <style>.pnotify-center {right: calc(50% - 150px) !important;}</style> -->
+    <!-- <style>.pnotify-center {right: calc(50% - 150px) !important;}</style> -->
     <script src="plug/jquery.min.js"></script>  
     <script src="plug/pnotify/pnotify.custom.min.js"></script>  
-<script type="text/javascript">
+    <script type="text/javascript">
         $(function(){
           $("#pw").keypress(function(e){
               if(e.keyCode == 13){
@@ -123,12 +123,11 @@
           alert(error.responseText);  //列印錯誤 內容
         }
       );
-        } 
-   
+    } 
     opts.title = "Oh No";
-        opts.text = "Watch out for that water tower!";
-        opts.type = "error";
-        new PNotify(opts);
-        </script>
+    opts.text = "Watch out for that water tower!";
+    opts.type = "error";
+    new PNotify(opts);
+    </script>
   </body>
 </html>

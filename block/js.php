@@ -45,12 +45,56 @@
     <script src="plug/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
     <script src="plug/datatables.net-responsive-bs/js/responsive.bootstrap.js"></script>
     <script src="plug/datatables.net-scroller/js/dataTables.scroller.min.js"></script>
-
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
     
     <!-- Custom Theme Scripts -->
     <script src="system/js/custom.min.js"></script>
     
     <script>
+    $('form').on('submit', function(e) {
+    var f = e.target
+    if ($(f).data('type') == 'formdata') {
+      e.preventDefault()
+      var formData = new FormData(f), $action = $(f).attr('action')
+      var qstr = '',
+        flag = 0,
+        errorMsg = '',
+        key
+      //登入欄位判斷
+      $(f)
+        .find('.req')
+        .each(function() {
+          if ($(this).val() == '') {
+            Swal.fire({
+              text: '請檢查必填欄位是否完成',
+              type: 'error',
+              showConfirmButton: false,
+              cancelButtonText: '關閉',
+              showCancelButton: true,
+            })
+          }
+        })
+        formData.append('action', $action)
+        for (key in formData.entries()) {
+          if (formData.getAll(key)) {
+            qstr += key[0] + '=' + key[1] + '&'
+          }
+        }
+        xhr = new XMLHttpRequest()
+        xhr.overrideMimeType('application/json')
+        xhr.open($(f).attr('method'), $(f).attr('action'))
+        xhr.onload = function() {
+          var json = JSON.parse(xhr.responseText)
+
+          // eval('func_' + $action + '(json)')
+          // $('.loading').show()
+        }
+        xhr.send(formData)
+    }
+  })
+
+
+
     $("#datalist").DataTable({
       language: {
         decimal: "",
@@ -143,8 +187,7 @@
           if (status == google.maps.GeocoderStatus.OK) {
             //判斷狀態
             var pos = [
-              results[0].geometry.location.lat(),
-              results[0].geometry.location.lng()
+              results[0].geometry.location.lat(), results[0].geometry.location.lng()
             ]
             return pos //取得座標
           } else {
