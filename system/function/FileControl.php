@@ -8,6 +8,19 @@ function wrap_img($file_data,$file_path="../../upload/",$file_name){
     $data = base64_decode($img);
     file_put_contents($file_path.$file_name, $data);
 }
+
+//UUID
+function uuid($prefix = '')
+{
+    $str = md5(uniqid(mt_rand(), true));
+    $uuid = substr($str, 0, 8).'-';
+    $uuid .= substr($str, 8, 4).'-';
+    $uuid .= substr($str, 12, 4).'-';
+    $uuid .= substr($str, 16, 4).'-';
+    $uuid .= substr($str, 20, 12);
+
+    return $prefix.'_'.$uuid;
+}
 //取得Youtube ID
 function video_id($url)
 {
