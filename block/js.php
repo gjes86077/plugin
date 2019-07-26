@@ -85,6 +85,7 @@
         xhr.open($(f).attr('method'), $(f).attr('action'))
         xhr.onload = function() {
           var json = JSON.parse(xhr.responseText)
+          eval('func_afterEditing(json)')
 
           // eval('func_' + $action + '(json)')
           // $('.loading').show()
