@@ -62,6 +62,6 @@ session_start();
     $profile = SelectNCondition($link, 'inf');
     $info = $profile[0];
     define('WEB_TITLE', $profile[0]['title']);
-    ini_set('memory_limit', '16M');
+    ini_set('memory_limit', '128M');
     $p = isset($_POST) ? $_POST : '';
     $g = isset($_GET) ? $_GET : '';

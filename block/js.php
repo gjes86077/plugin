@@ -55,6 +55,13 @@
     var f = e.target
     if ($(f).data('type') == 'formdata') {
       e.preventDefault()
+      $(".preview").each(function(index) {
+          if ( $(this).data("event") == "cropper" && $(this).data("status") == "modify" ) {
+            var cropcanvas = $(this).cropper("getCroppedCanvas",{width:$(this).data("width"),height:$(this).data("height")})
+            var croppng = cropcanvas.toDataURL("image/png",0.5)
+            $(this).prev().val(croppng)
+          }
+        })
       var formData = new FormData(f), $action = $(f).attr('action')
       var qstr = '',
         flag = 0,
@@ -90,13 +97,16 @@
           // eval('func_' + $action + '(json)')
           // $('.loading').show()
         }
+        if(confirm('是否確認送出？')){
         xhr.send(formData)
+
+        }
     }
   })
 
 
 
-    $("#datalist").DataTable({
+    var datalist=$("#datalist").DataTable({
       language: {
         decimal: "",
         emptyTable: "No data available in table",
@@ -157,21 +167,7 @@
         reader.readAsDataURL(input.files[0])
       }
     })
-    $("#form_id").submit(function(e) {
-      // e.preventDefault()
-      if (confirm("確認變更？")) {
-        $(".preview").each(function(index) {
-          if ( $(this).data("event") == "cropper" && $(this).data("status") == "modify" ) {
-            var cropcanvas = $(this).cropper("getCroppedCanvas",{width:$(this).data("width"),height:$(this).data("height")})
-            var croppng = cropcanvas.toDataURL("image/png",0.5)
-            $(this).prev().val(croppng)
-            console.log(croppng)
-          }
-        })
-      }  else {
-        return false
-      }
-    })
+
     function format_float(num, pos) {
       var size = Math.pow(10, pos)
       return Math.round(num * size) / size
