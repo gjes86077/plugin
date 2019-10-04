@@ -166,7 +166,7 @@ function SelectNConditionOrder($link,$table,$sort=array('sort'=>'desc'),$i=0){
 		exit();
 	}
 }
-function Select1Condition($link,$table,$column_condition,$i=0){
+function SelectCondition($link,$table,$column_condition,$i=0){
 	foreach ($column_condition as $key => $val) {
 		$comma = "`"; //逗點
 		if ($Cdata != "") {
