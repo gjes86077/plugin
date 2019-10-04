@@ -1,12 +1,12 @@
-<? 
-  require_once  "system/config.php"; 
+<?
+  require_once  "system/config.php";
     if(!checkAdmin())
     HEADER('Location:login.php');
-  
+
   $table='user';
   $result= SelectCustom($link,'Select * from user where account !="forest"');
   $control_file='user.php';
-  
+
   $title='成員管理';
   $amount=10; //一頁幾筆
   $totalData  = count($result);       //資料總數
@@ -64,15 +64,15 @@
                           <input type="hidden" id="account2" name="account2" class="form-control col-md-7 col-xs-12" required="required">
                         </div>
                       </div>
-                     
+
                       <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">密碼<span class="required">*</span>
-                        </label> 
+                        </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
                           <input type="password" id="password" name="password" class="form-control col-md-7 col-xs-12"  AutoComplete="Off" >
                         </div>
                       </div>
-                      
+
                       <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">層級<span class="required">*</span>
                         </label>
@@ -92,7 +92,7 @@
                            <option value="1">停權</option>
                          </select>
                         </div>
-                      </div>                              
+                      </div>
                       <div class="form-group">
                         <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
                           <button class="btn btn-danger" type="button" onclick="list()" >取消</button>
@@ -106,7 +106,7 @@
                 </div>
               </div>
             </div>
-            
+
             <div class="x_panel" id="list">
                   <div class="x_title">
                     <h2><?=$title?>清單 <a href="javascript:insert();" class="btn btn-primary">建立會員</a></h2>
@@ -132,17 +132,17 @@
                               <button class="btn btn-primary" onclick="update(<?=$member['id']?>)" data-toggle="tooltip" data-placement="top" data-original-title="編輯<?=$member['title']?>"><i class="fa fa-edit"></i></button>
                               </td>
                             <td class=" "><?=$member['account']?></td>
-                            <td class=" "><?=$member['name']?></td>                            
-                            <td class=" "><?=$member['rank']==1?'系統管理者':'一般管理者'?></td>
-                            <td class=" "><?=$member['is_open']==1?'停權':'正常'?></td>
-                          </tr>  
-                          <?}?>                        
+                            <td class=" "><?=$member['name']?></td>
+                            <td class=" "><?=$member['rank'] == 1 ? '系統管理者' : '一般管理者'?></td>
+                            <td class=" "><?=$member['is_open'] == 1 ? '停權' : '正常'?></td>
+                          </tr>
+                          <?}?>
                         </tbody>
                       </table>
                     </div>
                   </div>
                 </div>
-            
+
     <form action="control/<?php echo $control_file; ?>?action=delete" method="post" class="form-horizontal" id="del_from" >
       <input type="hidden" name="id" id="id" value="">
     </form>
@@ -221,7 +221,7 @@
         $("#edit small").html("建立");
         $("#form_btn").html("建立");
         $("#form_id").attr("action","control/<?php echo $control_file; ?>?action=insert");
-        $("#list").addClass("hidden");        
+        $("#list").addClass("hidden");
         $("#password").attr("placeholder","");
       }
       //刪除
@@ -243,9 +243,9 @@
        }
        function check(){
         if($("#top").val()==1)
-          $("#top").val(0)   ;     
+          $("#top").val(0)   ;
         else
-          $("#top").val(1)   ;        
+          $("#top").val(1)   ;
        }
        function update(ac) {
         $("#edit").removeClass("hidden");
@@ -253,16 +253,16 @@
         $("#form_btn").html("變更");
         $("#list").addClass("hidden");
         $("#password").attr("placeholder","不變更請留白");
-       
+
         $.ajax({
-          url:"control/<?=$control_file; ?>?action=getId",
+          url:"control/<?=$control_file;?>?action=getId",
           dataType : "json",
           type:"GET",
           data:{"id" : ac},
           beforeSend : function() {}
         }).done(
           function(result) {
-            if (result) {       
+            if (result) {
               $("#id").val(id);
               $("#name").val(result[0].name);
               $("#email").val(result[0].email);
@@ -275,7 +275,7 @@
             {
               alert('沒有值');
             }
-          } 
+          }
         ).fail(
           function (error) {          //錯誤處理
             alert(error.responseText);  //列印錯誤 內容
@@ -285,6 +285,14 @@
         $("#form_id").attr("action","control/<?php echo $control_file; ?>?action=update");
         $("#form_btn").attr("onsubmit","confirm('確認變更？')");
       }
-    </script>	
+
+    function func_afterEditing(res){
+      if(res.status==true){
+        Swal.fire("已變更")
+      }else{
+        Swal.fire("變更失敗")
+      }
+    }
+    </script>
   </body>
 </html>

@@ -10,12 +10,8 @@
     "fa": "home",
     "list": [
       {
-        "title": "時區管理",
-        "php_file": "timezone.php"
-      },
-      {
-        "title": "代理品牌 LOGO 管理",
-        "php_file": "brands.php"
+        "title": "橫幅管理",
+        "php_file": "Banner.php"
       },
       {
         "title": "介紹區塊編輯",

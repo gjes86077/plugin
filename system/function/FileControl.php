@@ -1,7 +1,7 @@
 <? 
 //栽圖
 function wrap_img($file_data,$file_path="../../upload/",$file_name){   
-    ini_set("memory_limit","100M");
+    ini_set("memory_limit","200M");
     $file_name = $file_name.".png";
     $img = str_replace('data:image/png;base64,', '', $file_data);
     $img = str_replace(' ', '+', $img);

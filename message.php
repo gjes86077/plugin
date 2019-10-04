@@ -1,9 +1,8 @@
-<? 
-  require_once  "system/config.php"; 
-  require_once  "block/side.php"; 
+<?
+  require_once  "system/config.php";
+  require_once  "block/side.php";
     if(!checkAdmin())
     HEADER('Location:login.php');
-  
   $table='contact';
   $result= SelectNConditionOrder($link,$table,array("crt_date"=>"desc"));
   $title='官網訊息';
@@ -11,7 +10,8 @@
   $totalData  = count($result);       //資料總數
   $totalPage  = ceil($totalData/$amount);   //總頁數
   $control_file='message.php';
-?><!DOCTYPE html>
+?>
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -49,7 +49,7 @@
             <div class="page-title">
               <div class="title_left">
                 <h3>官網留言訊息</h3>
-              </div>              
+              </div>
             </div>
             <!-- End to do list -->
             <div class="col-xs-12">
@@ -82,9 +82,9 @@
                           <textarea name="content" id="content" cols="30" rows="10" class="ckeditor"></textarea>
                         </div>
                       </div>
-                     
+
                   <div class="clearfix"></div>
-                              
+
                       <div class="form-group">
                         <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
                           <button class="btn btn-danger" type="button" onclick="list()" >取消</button>
@@ -95,46 +95,46 @@
                     </form>
                   </div>
                 </div>
-              
+
                 <!-- 信件編輯區塊 -->
               <div class="x_panel" id="list">
                 <div class="x_title">
                   <h2>訊息瀏覽 </h2>
-                  
+
                   <div class="clearfix"></div>
                 </div>
                 <div class="x_content">
                   <ul class="list-unstyled msg_list">
-                    <?php foreach ($result as $mes): 
-                       $label=$mes['read']==0?'<span class="label label-danger">未讀</span>':'';
-                    ?>                
-                    
-                    <li>
-                        <div class="col-md-1 col-xs-12"><img src="system/images/user.png" alt="img" />
-                        
-                        </div>
-                        <div class="col-md-2 col-xs-12">
-                          <div class="row">
-                            <div class="col-xs-12">姓　　名：<?=$mes['name']?></div>
-                            <div class="col-xs-12">聯絡電話：<?=$mes['phone']?></div>
-                            <div class="col-xs-12">電子信箱：<?=$mes['email']?></div>
-                            <div class="col-xs-12">
-                              <button class="btn btn-danger" onclick="del(<?=$mes['id']?>)">刪除</button>
-                              <button class="btn btn-warning" onclick="update(<?=$mes['id']?>)">回覆</button>
-                            </div>
-                          </div>
-                        </div> 
-                        <div class="col-md-9 col-xs-12">
-                          <span class="time"><?=$label?><?=CheckTime($mes['crt_date'])?></span>
-                          <p class="message">
-                             <?=($mes['title'])?>
-                          </p>
-                          <p class="message">
-                             <?=nl2br($mes['content'])?>
-                          </p>
-                        </div> 
-                    </li>
-                    <?php endforeach ?>
+                    <?php foreach ($result as $mes):
+    $label = $mes['read'] == 0 ? '<span class="label label-danger">未讀</span>' : '';
+    ?>
+
+		                    <li>
+		                        <div class="col-md-1 col-xs-12"><img src="system/images/user.png" alt="img" />
+
+		                        </div>
+		                        <div class="col-md-2 col-xs-12">
+		                          <div class="row">
+		                            <div class="col-xs-12">姓　　名：<?=$mes['name']?></div>
+		                            <div class="col-xs-12">聯絡電話：<?=$mes['phone']?></div>
+		                            <div class="col-xs-12">電子信箱：<?=$mes['email']?></div>
+		                            <div class="col-xs-12">
+		                              <button class="btn btn-danger" onclick="del(<?=$mes['id']?>)">刪除</button>
+		                              <button class="btn btn-warning" onclick="update(<?=$mes['id']?>)">回覆</button>
+		                            </div>
+		                          </div>
+		                        </div>
+		                        <div class="col-md-9 col-xs-12">
+		                          <span class="time"><?=$label?><?=CheckTime($mes['crt_date'])?></span>
+		                          <p class="message">
+		                             <?=($mes['title'])?>
+		                          </p>
+		                          <p class="message">
+		                             <?=nl2br($mes['content'])?>
+		                          </p>
+		                        </div>
+		                    </li>
+		                    <?php endforeach?>
                   </ul>
                 </div>
               </div>
@@ -187,7 +187,7 @@
         $("#edit small").html("");
         $("#form_btn").html("送出");
         $.ajax({
-          url:"control/<?=$control_file; ?>?action=getId",
+          url:"control/<?=$control_file;?>?action=getId",
           dataType : "json",
           type:"GET",
           data:{
@@ -196,9 +196,9 @@
           beforeSend : function() {}
         }).done(
           function(result) {
-            if (result) {       
+            if (result) {
               $("#id").val(id);
-              $("#send").html(result[0].email);   
+              $("#send").html(result[0].email);
               $("#send_to").val(result[0].email);
               $("#content").val('<div>親愛的 '+result[0].name+' 先生／小姐，你好：</div><div></div><div></div><div></div><div>如果其他需要幫忙的地方，歡迎在至官網使用留言功能，或是將訊息直接透過信件與我們聯繫，並事事順心、愉快。</div><div style="text-align:center;color:#f00;font-weight:bold">※此訊息為系統發信，請勿直接回信※</div>');
               CKEDITOR.instances['content'].setData();
@@ -207,7 +207,7 @@
             {
               alert('沒有值');
             }
-          } 
+          }
         ).fail(
           function (error) {          //錯誤處理
             alert(error.responseText);  //列印錯誤 內容
@@ -224,7 +224,7 @@
         $("#del_from").submit();
       }
     </script>
-	
+
   </body>
 </html>
 <? UpdateRead($link);?>

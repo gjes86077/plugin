@@ -1,9 +1,8 @@
 <?
 //SQL Select * 無條件
 function SelectCustom($link,$sql,$i=0){
-	
-	if ($i ==0) {		
-		$result = mysqli_query($link, $sql);		
+	if ($i ==0) {
+		$result = mysqli_query($link, $sql);
 		$dataArray =array();
 		while ($row = mysqli_fetch_assoc($result)){
 			$dataArray[] = $row;
@@ -12,15 +11,14 @@ function SelectCustom($link,$sql,$i=0){
 	}
 	else
 	{
-		echo "<br>".$sql."<br>";
+		echo "$sql \n";
 		exit();
 	}
-	
 }
 function SelectLastID($link,$i=0){
 	$sql="SELECT LAST_INSERT_ID() as id";
-	if ($i ==0) {		
-		$result = mysqli_query($link, $sql);		
+	if ($i ==0) {
+		$result = mysqli_query($link, $sql);
 		$dataArray =array();
 		while ($row = mysqli_fetch_assoc($result)){
 			$dataArray[] = $row;
@@ -29,10 +27,9 @@ function SelectLastID($link,$i=0){
 	}
 	else
 	{
-		echo "<br>".$sql."<br>";
+		echo "$sql \n";
 		exit();
 	}
-	
 }
 function SelectNConditionOrderLimit($link,$table,$order=array('order'=>'desc'),$page,$amount,$i=0){
 	$data	= "";
@@ -44,10 +41,9 @@ function SelectNConditionOrderLimit($link,$table,$order=array('order'=>'desc'),$
 	}
 	$page--;
 	$num=$page*$amount;
-	
 	$sql="SELECT * FROM `".$table."` ORDER BY $data limit $num,$amount";
 	$sql2="SELECT count(id) as count FROM `".$table."`";
-	if ($i ==0) {		
+	if ($i ==0) {
 		$result = mysqli_query($link, $sql);
 		$dataArray =array();
 		while ($row = mysqli_fetch_assoc($result)){
@@ -55,15 +51,14 @@ function SelectNConditionOrderLimit($link,$table,$order=array('order'=>'desc'),$
 		}
 		$result = mysqli_query($link, $sql2);
 		$row = mysqli_fetch_assoc($result);
-		
 		if ($row['count']>=1) {
 			$dataArray[0]['total_count']=$row['count'] ;
-		} 
+		}
 		return $dataArray;
 	}
 	else
 	{
-		echo "<br>".$sql."<br>";
+		echo "$sql \n";
 		exit();
 	}
 }
@@ -77,7 +72,6 @@ function Select1ConditionOrderLimit($link,$table,$column,$condition,$order=array
 	}
 	$page--;
 	$num=$page*$amount;
-	
 	$sql="SELECT * FROM `".$table."` WHERE $column = '$condition' ORDER BY $data limit $num,$amount";
 	$sql2="SELECT count(id) as count FROM `".$table."` WHERE $column = '$condition'";
 	if ($i ==0) {
@@ -92,19 +86,19 @@ function Select1ConditionOrderLimit($link,$table,$column,$condition,$order=array
 		$row = mysqli_fetch_assoc($result);
 		if ($row['count']>=1) {
 			$dataArray[0]['total_count']=$row['count'] ;
-		} 
+		}
 		return $dataArray;
 	}
 	else
 	{
-		echo "<br>".$sql."<br>";
+		echo "$sql \n";
 		exit();
 	}
 }
 function SelectNCondition($link,$table,$i=0){
 	$sql="SELECT * FROM `".$table."`";
-	if ($i ==0) {		
-		$result = mysqli_query($link, $sql);		
+	if ($i ==0) {
+		$result = mysqli_query($link, $sql);
 		$dataArray =array();
 		while ($row = mysqli_fetch_assoc($result)){
 			$dataArray[] = $row;
@@ -113,15 +107,14 @@ function SelectNCondition($link,$table,$i=0){
 	}
 	else
 	{
-		echo "<br>".$sql."<br>";
+		echo "$sql \n";
 		exit();
 	}
-	
 }
 function SelectUnread($link,$i=0){
 	$sql="SELECT * FROM `contact` where `read`=0";
-	if ($i ==0) {		
-		$result = mysqli_query($link, $sql);		
+	if ($i ==0) {
+		$result = mysqli_query($link, $sql);
 		$dataArray =array();
 		while ($row = mysqli_fetch_assoc($result)){
 			$dataArray[] = $row;
@@ -130,14 +123,14 @@ function SelectUnread($link,$i=0){
 	}
 	else
 	{
-		echo "<br>".$sql."<br>";
+		echo "$sql \n";
 		exit();
-	}	
+	}
 }
 function MessageCount($link,$i=0){
 	$sql="SELECT count(`id`) as count FROM `contact` WHERE `read` = 0";
-	if ($i ==0) {		
-		$result = mysqli_query($link, $sql);		
+	if ($i ==0) {
+		$result = mysqli_query($link, $sql);
 		$dataArray =array();
 		while ($row = mysqli_fetch_assoc($result)){
 			$dataArray[] = $row;
@@ -146,10 +139,9 @@ function MessageCount($link,$i=0){
 	}
 	else
 	{
-		echo "<br>".$sql."<br>";
+		echo "$sql \n";
 		exit();
 	}
-	
 }
 function SelectNConditionOrder($link,$table,$sort=array('sort'=>'desc'),$i=0){
 	$data	= "";
@@ -160,7 +152,7 @@ function SelectNConditionOrder($link,$table,$sort=array('sort'=>'desc'),$i=0){
 		$data.=$comma.$key."`  ".$val;
 	}
 	$sql="SELECT * FROM `".$table."` ORDER BY $data ";
-	if ($i ==0) {		
+	if ($i ==0) {
 		$result = mysqli_query($link, $sql);
 		$dataArray =array();
 		while ($row = mysqli_fetch_assoc($result)){
@@ -170,13 +162,20 @@ function SelectNConditionOrder($link,$table,$sort=array('sort'=>'desc'),$i=0){
 	}
 	else
 	{
-		echo "<br>".$sql."<br>";
+		echo "$sql \n";
 		exit();
 	}
 }
-function Select1Condition($link,$table,$column,$condition,$i=0){
-	$sql="SELECT * FROM `".$table."` WHERE $column = '$condition'";
-	if ($i ==0) {		
+function Select1Condition($link,$table,$column_condition,$i=0){
+	foreach ($column_condition as $key => $val) {
+		$comma = "`"; //逗點
+		if ($Cdata != "") {
+			$comma = " and `";
+		}
+		$Cdata .= "{$comma}{$key}`='$val'";
+	}
+	$sql="SELECT * FROM `".$table."` WHERE $Cdata";
+	if ($i ==0) {
 		$result = mysqli_query($link, $sql);
 		$dataArray =array();
 		while ($row = mysqli_fetch_assoc($result)){
@@ -186,20 +185,27 @@ function Select1Condition($link,$table,$column,$condition,$i=0){
 	}
 	else
 	{
-		echo "<br>".$sql."<br>";
+		echo "$sql \n";
 		exit();
 	}
 }
-function Select1ConditionOrder($link,$table,$column,$condition,$sort=array('sort'=>'desc'),$i=0){
+function SelectConditionOrder($link,$table,$column_condition,$sort=array('sort'=>'desc'),$i=0){
 	$data	= "";
 	foreach($sort as $key => $val){
 		$comma = "`";	//逗點
 		if($data != "")
-			$comma = ",`";
+		$comma = ",`";
 		$data.=$comma.$key."`  ".$val;
 	}
-	$sql="SELECT * FROM `".$table."` WHERE $column = '$condition' ORDER BY $data ";
-	if ($i ==0) {		
+	$Cdata	= "";
+	foreach($column_condition as $key => $val){
+		$comma = "`";	//逗點
+		if($Cdata != "")
+			$comma = " and `";
+		$Cdata.="{$comma}{$key}`='$val'";
+	}
+	$sql="SELECT * FROM `".$table."` WHERE $Cdata ORDER BY $data ";
+	if ($i ==0) {
 		$result = mysqli_query($link, $sql);
 		$dataArray =array();
 		while ($row = mysqli_fetch_assoc($result)){
@@ -209,14 +215,14 @@ function Select1ConditionOrder($link,$table,$column,$condition,$sort=array('sort
 	}
 	else
 	{
-		echo "<br>".$sql."<br>";
+		echo "$sql \n";
 		exit();
 	}
 }
 //---修改---//
 function UpdateRead($link,$i=0){
 	$sql = "UPDATE  `contact` SET `read`=1 WHERE `read`=0";
-	if ($i == 0) {		
+	if ($i == 0) {
 		$result = @mysqli_query($link, $sql);
 		return $result;
 		// mysqli_insert_id always return 0
@@ -229,7 +235,7 @@ function UpdateRead($link,$i=0){
 	}
 	else
 	{
-		echo "<br>".$sql."<br>";
+		echo "$sql\n";
 		exit();
 	}
 }
@@ -243,7 +249,7 @@ function UpdateById($link,$table,$column_list,$id,$i=0){
 		$data.=$comma.$key."` = '".$val."'";
 	}
 	$sql = "UPDATE  `$table` SET $data WHERE `id`='".$id."'";
-	if ($i == 0) {		
+	if ($i == 0) {
 		$result = @mysqli_query($link, $sql);
 		return $result;
 		// mysqli_insert_id always return 0
@@ -256,11 +262,11 @@ function UpdateById($link,$table,$column_list,$id,$i=0){
 	}
 	else
 	{
-		echo "<br>".$sql."<br>";
+		echo "$sql \n";
 		exit();
 	}
 }
-function UpdateByCustom($link,$table,$column_list,$column,$id,$i=0){
+function UpdateByCustom($link,$table,$column_list,$column_condition,$i=0){
 	$data	= "";
 	foreach($column_list as $key => $val){
 		$comma = "`";	//逗點
@@ -269,8 +275,15 @@ function UpdateByCustom($link,$table,$column_list,$column,$id,$i=0){
 		}
 		$data.=$comma.$key."` = '".$val."'";
 	}
-	$sql = "UPDATE  `$table` SET $data WHERE `$column`='".$id."'";
-	if ($i == 0) {		
+	foreach ($column_condition as $key => $val) {
+		$comma = "`"; //逗點
+		if ($Cdata != "") {
+			$comma = " and `";
+		}
+		$Cdata .= "{$comma}{$key}`='$val'";
+	}
+	$sql = "UPDATE  `$table` SET $data WHERE $Cdata";
+	if ($i == 0) {
 		$result = @mysqli_query($link, $sql);
 		return $result;
 		// mysqli_insert_id always return 0
@@ -283,12 +296,12 @@ function UpdateByCustom($link,$table,$column_list,$column,$id,$i=0){
 	}
 	else
 	{
-		echo "<br>".$sql."<br>";
+		echo "$sql \n";
 		exit();
 	}
 }
 function UpdateCustom($link,$sql,$i=0){
-	if ($i == 0) {		
+	if ($i == 0) {
 		$result = @mysqli_query($link, $sql);
 		return $result;
 		// mysqli_insert_id always return 0
@@ -301,20 +314,20 @@ function UpdateCustom($link,$sql,$i=0){
 	}
 	else
 	{
-		echo "<br>".$sql."<br>";
+		echo "$sql \n";
 		exit();
 	}
 }
 //---刪除---//
 function DeleteById($link, $table, $column='id', $condition,$i=0) {
 	$sql="DELETE FROM `".$table."` WHERE $column = '$condition'";
-	if ($i == 0) {		
-		$result = mysqli_query($link, $sql);		
+	if ($i == 0) {
+		$result = mysqli_query($link, $sql);
 		return $result;
 	}
 	else
 	{
-		echo "<br>".$sql."<br>";
+		echo "$sql \n";
 		exit();
 	}
 }
@@ -336,7 +349,7 @@ function InsertOne($link,$table,$column_list,$i=0){
 		$data		.= " $comma'$val' ";
 	}
 	$sql = "INSERT INTO `$table` ($fields) VALUES ($data) ";
-	if ($i == 0) {		
+	if ($i == 0) {
 		$result = @mysqli_query($link, $sql);
 		return $result;
 		// mysqli_insert_id always return 0
@@ -349,7 +362,7 @@ function InsertOne($link,$table,$column_list,$i=0){
 	}
 	else
 	{
-		echo "<br>".$sql."<br>";
+		echo "$sql \n";
 		exit();
 	}
 }

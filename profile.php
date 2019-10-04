@@ -1,5 +1,5 @@
-<? 
-  require_once  "system/config.php"; 
+<?
+  require_once  "system/config.php";
     if(!checkAdmin())
     HEADER('Location:login.php');
   $title="網站設定";
@@ -21,7 +21,7 @@
     <!-- Font Awesome -->
     <link href="plug/font-awesome/css/font-awesome.min.css" rel="stylesheet">
     <!-- NProgress -->
-    <link href="plug/nprogress/nprogress.css" rel="stylesheet">    
+    <link href="plug/nprogress/nprogress.css" rel="stylesheet">
     <!-- Custom Theme Style -->
     <link href="system/css/custom.css" rel="stylesheet">
     <?require_once  "block/side.php";?>
@@ -41,7 +41,7 @@
             <div class="page-title">
               <div class="title_left">
                 <h3><?=$title?>編修</h3>
-              </div>             
+              </div>
             </div>
             <div class="clearfix"></div>
             <div class="row">
@@ -52,7 +52,7 @@
                     <div class="clearfix"></div>
                   </div>
                   <div class="x_content">
-                    <form class="form-horizontal form-label-left" action="control/profile.php" method="post"> 
+                    <form class="form-horizontal form-label-left" action="control/profile.php" method="post">
                       <div class="item form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="title">網站名稱 <span class="required">*</span>
                         </label>
@@ -75,7 +75,7 @@
                           <input id="youtube_channel" class="form-control col-md-7 col-xs-12 "  name="youtube_channel" placeholder="Youtube頻道連結" required="required" type="text" value="<?=$res['youtube_channel']?>">
                         </div>
                       </div>
-                    
+
                       <div class="item form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="address">聯絡地址 <span class="required">*</span>
                         </label>
@@ -87,7 +87,7 @@
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="location">地理座標 <span class="required">*</span>
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input id="location" class="form-control col-md-7 col-xs-12 "  name="location" placeholder="地理座標" required="required" type="text" value="<?=$res['lat'].','.$res['lng']?>">
+                          <input id="location" class="form-control col-md-7 col-xs-12 "  name="location" placeholder="地理座標" required="required" type="text" value="<?=$res['lat'] . ',' . $res['lng']?>">
                         </div>
                       </div>
                       <div class="item form-group">
@@ -135,7 +135,7 @@
         <!-- /footer content -->
       </div>
     </div>
-    
+
     <!-- CKEdit -->
     <script src="plug/CKEdit/ckeditor/ckeditor.js"></script>
     <!-- jQuery -->
@@ -153,20 +153,28 @@
     <script>
     $(function(){
       $("#address").on("input",function(){
-      var geocoder = new google.maps.Geocoder();  //定義一個Geocoder物件   
-        geocoder.geocode(   
-        { address: $(this).val() },    //設定地址的字串   
-        function(results, status) {    //callback function   
-          if (status == google.maps.GeocoderStatus.OK) {//判斷狀態 
+      var geocoder = new google.maps.Geocoder();  //定義一個Geocoder物件
+        geocoder.geocode(
+        { address: $(this).val() },    //設定地址的字串
+        function(results, status) {    //callback function
+          if (status == google.maps.GeocoderStatus.OK) {//判斷狀態
             var pos = [results[0].geometry.location.lat(), results[0].geometry.location.lng()];
-              $('#location').val(pos) ;             //取得座標                                   
-            } else {   
+              $('#location').val(pos) ;             //取得座標
+            } else {
               console.error("無法正確取得座標！");
-          }   
-        })   
+          }
+        })
       })
     })
+
+    function func_afterEditing(res){
+      if(res.status==true){
+        Swal.fire("已變更")
+      }else{
+        Swal.fire("變更失敗")
+      }
+    }
     </script>
-	
+
   </body>
 </html>
