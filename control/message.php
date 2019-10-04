@@ -21,7 +21,7 @@ function getId($link, $type = '')
     $id = checkHtmlPhpTag($id);
 
     $tableName = 'contact';
-    $result    = Select1Condition($link, $tableName, 'id', $id);
+    $result    = SelectCondition($link, $tableName, ['id' => $id]);
     echo json_encode($result);
 }
 function delete($link)
@@ -42,7 +42,7 @@ function delete($link)
     //移除HTML標籤
     $id = checkHtmlPhpTag($id);
 
-    $result = DeletById($link, 'contact', 'id', $id);
+    $result = DeleteById($link, 'contact', 'id', $id);
     if ($result) {
         echo json_encode($result);
         exit();

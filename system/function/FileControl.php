@@ -82,7 +82,7 @@ function fileimg($filesKey_key,$db_name,$path="../../upload/",$img="img"){
     $post = array_merge($post,$filesArray);
     if(array_key_exists($filesKey_key, $post)){
         $post[$img]=$post[$filesKey_key]; 
-        $img_tb=Select1Condition($link,$db_name,'id',$post['id']);
+        $img_tb=SelectCondition($link,$db_name,'id',$post['id']);
         $path="../../upload/".$img_tb[0][$img];
         if(file_exists($path))
         {unlink($path);}

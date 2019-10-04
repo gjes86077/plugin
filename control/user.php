@@ -22,7 +22,7 @@ function getId($link, $type = '')
     $id = checkHtmlPhpTag($id);
 
     $tableName = 'user';
-    $result    = Select1Condition($link, $tableName, 'id', $id);
+    $result    = SelectCondition($link, $tableName, ['id' => $id]);
     echo json_encode($result);
 }
 function delete($link)

@@ -62,7 +62,7 @@ function SelectNConditionOrderLimit($link,$table,$order=array('order'=>'desc'),$
 		exit();
 	}
 }
-function Select1ConditionOrderLimit($link,$table,$column,$condition,$order=array('order'=>'desc'),$page,$amount,$i=0){
+function SelectConditionOrderLimit($link,$table,$column,$condition,$order=array('order'=>'desc'),$page,$amount,$i=0){
 	$data	= "";
 	foreach($order as $key => $val){
 		$comma = "`";	//逗點
