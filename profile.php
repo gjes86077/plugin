@@ -3,7 +3,7 @@
     if(!checkAdmin())
     HEADER('Location:login.php');
   $title="網站設定";
-  $result=SelectNCondition($link,'inf');
+  $result=SelectNCondition($cn,'inf');
   $res=$result[0];
 ?>
 <!DOCTYPE html>
@@ -30,10 +30,10 @@
     <div class="container body">
       <div class="main_container">
         <div class="col-md-3 left_col  menu_fixed">
-          <?side(MessageCount($link));?>
+          <?side(MessageCount($cn));?>
         </div>
         <!-- top navigation -->
-        <?top_nav($link);?>
+        <?top_nav($cn);?>
         <!-- /top navigation -->
         <!-- page content -->
         <div class="right_col" role="main">

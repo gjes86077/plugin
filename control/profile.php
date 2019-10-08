@@ -5,14 +5,14 @@ $key = array('title', 'address', 'youtube_channel', 'location', 'service', 'keyw
 $p   = CheckAll($_POST, $key);
 if (isset($_POST['update_profile'])) {
     $str     = htmlspecialchars($p['ga'], ENT_QUOTES);
-    $profile = UpdateById($link, 'inf', [
+    $profile = UpdateById($cn, 'inf', [
         'title'   => $p['title'],
         'keyword' => $p['keyword'],
         'desc'    => $p['desc'],
         'ga'      => $str,
     ], 0);
     $loc = split(',', $p['location']);
-    $new = UpdateById($link, 'inf', [
+    $new = UpdateById($cn, 'inf', [
         'youtube_channel' => $p['youtube_channel'],
         'address'         => $p['address'],
         'service'         => $p['service'],

@@ -4,7 +4,7 @@
     HEADER('Location:login.php');
 
   $table='user';
-  $result= SelectCustom($link,'Select * from user where account !="forest"');
+  $result= SelectCustom($cn,'Select * from user where account !="forest"');
   $control_file='user.php';
 
   $title='成員管理';
@@ -48,7 +48,7 @@
                   </div>
                   <div class="x_content">
                     <br />
-                    <form id="form_id" data-parsley-validate class="form-horizontal form-label-left" method="post" enctype="multipart/form-data">
+                    <form id="form_id" data-parsley-validate class="form-horizontal form-label-left" method="post" enctype="multipart/form-data"  data-type='formdata'>
                     <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">姓名<span class="required">*</span>
                         </label>
@@ -114,7 +114,7 @@
                   </div>
                   <div class="x_content">
                     <div class="table-responsive">
-                      <table class="table table-striped jambo_table bulk_action" style="font-size: 18px;line-height: 40px;">
+                      <table class="table table-striped jambo_table bulk_action dataAjax" style="font-size: 18px;line-height: 40px;">
                         <thead>
                           <tr class="headings">
                             <th class="column-title col-xs-1 control "></th>
@@ -155,61 +155,16 @@
       </div>
     </div>
     <!-- jQuery -->
-    <script src="plug/CKEdit/ckeditor/ckeditor.js"></script>
-    <!-- jQuery -->
-    <script src="plug/jquery.min.js"></script>
-    <!-- Bootstrap -->
-    <script src="plug/bootstrap/dist/js/bootstrap.js"></script>
-    <!-- FastClick -->
-    <script src="plug/fastclick/lib/fastclick.js"></script>
-    <!-- NProgress -->
-    <script src="plug/nprogress/nprogress.js"></script>
-    <!-- bootstrap-progressbar -->
-    <script src="plug/bootstrap-progressbar/bootstrap-progressbar.min.js"></script>
-    <!-- iCheck -->
-    <script src="plug/iCheck/icheck.min.js"></script>
-    <!-- bootstrap-daterangepicker -->
-    <script src="plug/moment/min/moment.min.js"></script>
-    <script src="plug/bootstrap-daterangepicker/daterangepicker.js"></script>
-    <!-- bootstrap-wysiwyg -->
-    <script src="plug/bootstrap-wysiwyg/js/bootstrap-wysiwyg.min.js"></script>
-    <script src="plug/jquery.hotkeys/jquery.hotkeys.js"></script>
-    <script src="plug/google-code-prettify/src/prettify.js"></script>
-    <!-- jQuery Tags Input -->
-    <script src="plug/jquery.tagsinput/src/jquery.tagsinput.js"></script>
-    <!-- Switchery -->
-    <script src="plug/switchery/dist/switchery.min.js"></script>
-    <!-- Select2 -->
-    <script src="plug/select2/dist/js/select2.full.min.js"></script>
-    <!-- Parsley -->
-    <script src="plug/parsleyjs/dist/parsley.min.js"></script>
-    <!-- Autosize -->
-    <script src="plug/autosize/dist/autosize.min.js"></script>
-    <!-- jQuery autocomplete -->
-    <script src="plug/devbridge-autocomplete/dist/jquery.autocomplete.min.js"></script>
-    <!-- starrr -->
-    <script src="plug/starrr/dist/starrr.js"></script>
+<? require_once "block/js.php"?>
     <!-- Custom Theme Scripts -->
     <script src="system/js/custom.min.js"></script>
     <script>
 
-    $('#datatable').DataTable( {
-        "processing": true,
-        "serverSide": true,
-        "ajax": {
-            "url": "scripts/post.php",
-            "type": "POST"
-        },
-        "columns": [
-            { "data": "first_name" },
-            { "data": "last_name" },
-            { "data": "position" },
-            { "data": "office" },
-            { "data": "start_date" },
-            { "data": "salary" }
-        ]
-    } );
-
+controlUrl = 'control/<?php echo $control_file; ?>'
+function func_afterEditing(){
+Swal.fire('已儲存');
+dla.ajax().reload()
+}
       function insert() {
         type = '<?=$_GET['type']?>';
         $("#id").val(id);
@@ -226,10 +181,24 @@
       }
       //刪除
       function del(id){
-        $("#del_from #id").val(id);
-        $("#del_from").attr("action","control/<?php echo $control_file; ?>?action=delete");
-        if (!confirm("確認刪除？")) { return; }
-        $("#del_from").submit();
+        $('#del_from #id').val(id)
+        Swal.fire({
+          title: '確認刪除？',
+          text: '資料一經刪除，將無法還原！',
+          type: 'warning',
+          showCancelButton: true,
+          confirmButtonColor: '#3085d6',
+          cancelButtonColor: '#d33',
+          confirmButtonText: '確認刪除',
+          cancelButtonText: '取消',
+        }).then(result => {
+          if (result.value) {
+            $.post(controlUrl + '?action=delete', { id: id }, function() {
+              Swal.fire('已刪除', '完成刪除！', 'success')
+              dla.ajax.reload()
+            })
+          }
+        })
       }
       function resetPW(id){
         $("#del_from #id").val(id);
@@ -285,14 +254,6 @@
         $("#form_id").attr("action","control/<?php echo $control_file; ?>?action=update");
         $("#form_btn").attr("onsubmit","confirm('確認變更？')");
       }
-
-    function func_afterEditing(res){
-      if(res.status==true){
-        Swal.fire("已變更")
-      }else{
-        Swal.fire("變更失敗")
-      }
-    }
     </script>
   </body>
 </html>

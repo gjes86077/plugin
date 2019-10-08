@@ -17,5 +17,5 @@ $account  = checkHtmlPhpTag($account);
 $password = checkHtmlPhpTag($password);
 //登入
 
-$result = CheckLogin($link, $account, $password);
+$result = CheckLogin($cn, $account, $password);
 echo json_encode($result);

@@ -4,7 +4,7 @@
     if(!checkAdmin())
     HEADER('Location:login.php');
   $table='contact';
-  $result= SelectNConditionOrder($link,$table,array("crt_date"=>"desc"));
+  $result= SelectNConditionOrder($cn,$table,array("crt_date"=>"desc"));
   $title='官網訊息';
   $amount=10; //一頁幾筆
   $totalData  = count($result);       //資料總數
@@ -38,10 +38,10 @@
     <div class="container body">
       <div class="main_container">
         <div class="col-md-3 left_col ">
-        <?side(MessageCount($link))?>
+        <?side(MessageCount($cn))?>
         </div>
         <!-- top navigation -->
-        <?top_nav($link)?>
+        <?top_nav($cn)?>
         <!-- /top navigation -->
         <!-- page content -->
         <div class="right_col" role="main">
@@ -109,32 +109,32 @@
     $label = $mes['read'] == 0 ? '<span class="label label-danger">未讀</span>' : '';
     ?>
 
-		                    <li>
-		                        <div class="col-md-1 col-xs-12"><img src="system/images/user.png" alt="img" />
+			                    <li>
+			                        <div class="col-md-1 col-xs-12"><img src="system/images/user.png" alt="img" />
 
-		                        </div>
-		                        <div class="col-md-2 col-xs-12">
-		                          <div class="row">
-		                            <div class="col-xs-12">姓　　名：<?=$mes['name']?></div>
-		                            <div class="col-xs-12">聯絡電話：<?=$mes['phone']?></div>
-		                            <div class="col-xs-12">電子信箱：<?=$mes['email']?></div>
-		                            <div class="col-xs-12">
-		                              <button class="btn btn-danger" onclick="del(<?=$mes['id']?>)">刪除</button>
-		                              <button class="btn btn-warning" onclick="update(<?=$mes['id']?>)">回覆</button>
-		                            </div>
-		                          </div>
-		                        </div>
-		                        <div class="col-md-9 col-xs-12">
-		                          <span class="time"><?=$label?><?=CheckTime($mes['crt_date'])?></span>
-		                          <p class="message">
-		                             <?=($mes['title'])?>
-		                          </p>
-		                          <p class="message">
-		                             <?=nl2br($mes['content'])?>
-		                          </p>
-		                        </div>
-		                    </li>
-		                    <?php endforeach?>
+			                        </div>
+			                        <div class="col-md-2 col-xs-12">
+			                          <div class="row">
+			                            <div class="col-xs-12">姓　　名：<?=$mes['name']?></div>
+			                            <div class="col-xs-12">聯絡電話：<?=$mes['phone']?></div>
+			                            <div class="col-xs-12">電子信箱：<?=$mes['email']?></div>
+			                            <div class="col-xs-12">
+			                              <button class="btn btn-danger" onclick="del(<?=$mes['id']?>)">刪除</button>
+			                              <button class="btn btn-warning" onclick="update(<?=$mes['id']?>)">回覆</button>
+			                            </div>
+			                          </div>
+			                        </div>
+			                        <div class="col-md-9 col-xs-12">
+			                          <span class="time"><?=$label?><?=CheckTime($mes['crt_date'])?></span>
+			                          <p class="message">
+			                             <?=($mes['title'])?>
+			                          </p>
+			                          <p class="message">
+			                             <?=nl2br($mes['content'])?>
+			                          </p>
+			                        </div>
+			                    </li>
+			                    <?php endforeach?>
                   </ul>
                 </div>
               </div>
@@ -227,4 +227,4 @@
 
   </body>
 </html>
-<? UpdateRead($link);?>
+<? UpdateRead($cn);?>

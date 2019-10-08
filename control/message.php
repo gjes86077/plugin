@@ -2,7 +2,7 @@
 
 require_once realpath(dirname(__FILE__) . '/../') . '/system/config.php';
 
-function getId($link, $type = '')
+function getId($cn, $type = '')
 {
     //設定檢查傳入KEY值
     $keyArray = array('id');
@@ -21,10 +21,10 @@ function getId($link, $type = '')
     $id = checkHtmlPhpTag($id);
 
     $tableName = 'contact';
-    $result    = SelectCondition($link, $tableName, ['id' => $id]);
+    $result    = SelectCondition($cn, $tableName, ['id' => $id]);
     echo json_encode($result);
 }
-function delete($link)
+function delete($cn)
 {
     //設定檢查傳入KEY值
     $keyArray = array('id');
@@ -42,7 +42,7 @@ function delete($link)
     //移除HTML標籤
     $id = checkHtmlPhpTag($id);
 
-    $result = DeleteById($link, 'contact', 'id', $id);
+    $result = DeleteById($cn, 'contact', 'id', $id);
     if ($result) {
         echo json_encode($result);
         exit();
@@ -50,7 +50,7 @@ function delete($link)
         echo '刪除失敗';
     }
 }
-function send($link)
+function send($cn)
 {
     //設定檢查傳入KEY值
     $keyArray = array('id');
@@ -79,7 +79,7 @@ function send($link)
 if (isset($_GET['action']) && function_exists($_GET['action'])) {
     $action = $_GET['action'];
     $type   = $_POST['type'];
-    $action($link, $type);
+    $action($cn, $type);
 } else {
     echo 'NO!NO!NO!';
     exit();
