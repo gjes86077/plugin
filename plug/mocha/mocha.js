@@ -2206,7 +2206,7 @@ function inlineDiff(err, escape) {
     + color('diff removed', 'actual')
     + ' '
     + color('diff added', 'expected')
-    + '\n\n'
+    + '\n'
     + msg
     + '\n';
 
@@ -2243,7 +2243,7 @@ function unifiedDiff(err, escape) {
   return '\n      '
          + colorLines('diff added',   '+ expected') + ' '
          + colorLines('diff removed', '- actual')
-         + '\n\n'
+         + '\n'
          + lines.map(cleanUp).filter(notBlank).join('\n');
 }
 
@@ -3211,7 +3211,7 @@ function Landing(runner) {
     }
 
     // render landing strip
-    stream.write('\u001b[4F\n\n');
+    stream.write('\u001b[4F\n');
     stream.write(runway());
     stream.write('\n  ');
     stream.write(color('runway', Array(col).join('⋅')));
@@ -3394,7 +3394,7 @@ function Markdown(runner) {
     buf += test.title + '.\n';
     buf += '\n```js\n';
     buf += code + '\n';
-    buf += '```\n\n';
+    buf += '```\n';
   });
 
   runner.on('end', function(){

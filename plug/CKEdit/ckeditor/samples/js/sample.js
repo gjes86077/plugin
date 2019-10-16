@@ -23,7 +23,7 @@ var initSample = ( function() {
 		// :(((
 		if ( isBBCodeBuiltIn ) {
 			editorElement.setHtml(
-				'Hello world!\n\n' +
+				'Hello world!\n' +
 				'I\'m an instance of [url=http://ckeditor.com]CKEditor[/url].'
 			);
 		}

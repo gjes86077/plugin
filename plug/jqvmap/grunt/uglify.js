@@ -7,7 +7,7 @@ module.exports = {
 		' * @link <%= package.author.url %>\n' +
 		' * @license https://github.com/manifestinteractive/jqvmap/blob/master/LICENSE\n' +
 		' * @builddate <%= grunt.template.today("yyyy/mm/dd") %>\n' +
-		' */\n\n'
+		' */\n'
 	},
 	dist: {
 		files: {

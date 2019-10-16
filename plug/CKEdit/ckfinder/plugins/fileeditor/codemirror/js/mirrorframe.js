@@ -72,7 +72,7 @@ MirrorFrame.prototype = {
   macro: function() {
     var name = prompt("Name your constructor:", "");
     if (name)
-      this.mirror.replaceSelection("function " + name + "() {\n  \n}\n\n" + name + ".prototype = {\n  \n};\n");
+      this.mirror.replaceSelection("function " + name + "() {\n  \n}\n" + name + ".prototype = {\n  \n};\n");
   },
 
   reindent: function() {

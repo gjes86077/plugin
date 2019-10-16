@@ -127,7 +127,7 @@ function writeVersion() {
   return gulp.src(['index.html', 'doc/download.html', 'README.md'], { base: "./" })
     .pipe($.replace(/class="parsley-version">[^<]*</, `class="parsley-version">v${manifest.version}<`))
     .pipe($.replace(/releases\/tag\/[^"]*/, `releases/tag/${manifest.version}`))
-    .pipe($.replace(/## Version\n\n\S+\n\n/, `## Version\n\n${manifest.version}\n\n`))
+    .pipe($.replace(/## Version\n\S+\n/, `## Version\n${manifest.version}\n`))
     .pipe(gulp.dest('.'))
 }
 

@@ -1,6 +1,6 @@
-<? 
+<?
 //栽圖
-function wrap_img($file_data,$file_path="../../upload/",$file_name){   
+function wrap_img($file_data,$file_path="../../upload/",$file_name){
     ini_set("memory_limit","200M");
     $file_name = $file_name.".png";
     $img = str_replace('data:image/png;base64,', '', $file_data);
@@ -18,8 +18,10 @@ function uuid($prefix = '')
     $uuid .= substr($str, 12, 4).'-';
     $uuid .= substr($str, 16, 4).'-';
     $uuid .= substr($str, 20, 12);
+    $uuid =! empty($prefix) ? $prefix . '-' . $uuid : $uuid;
+    $uiud = strtoupper($uuid);
 
-    return $prefix.'_'.$uuid;
+    return $uuid;
 }
 //取得Youtube ID
 function video_id($url)
@@ -81,7 +83,7 @@ function fileimg($filesKey_key,$db_name,$path="../../upload/",$img="img"){
     }
     $post = array_merge($post,$filesArray);
     if(array_key_exists($filesKey_key, $post)){
-        $post[$img]=$post[$filesKey_key]; 
+        $post[$img]=$post[$filesKey_key];
         $img_tb=SelectCondition($link,$db_name,'id',$post['id']);
         $path="../../upload/".$img_tb[0][$img];
         if(file_exists($path))
@@ -92,8 +94,8 @@ function fileimg($filesKey_key,$db_name,$path="../../upload/",$img="img"){
         $post[$img]=$post[$img];
     }
 
-    unset($post[$filesKey_key]);  
-    
+    unset($post[$filesKey_key]);
+
     return $post[$img];
 }
 function uploadFile($filesArray,$path="../../upload/",$typeString = "") {
@@ -118,7 +120,7 @@ function uploadFile($filesArray,$path="../../upload/",$typeString = "") {
                         if (!preg_match("/$dwg/", $typeString)) {
                             return false;
                         }
-                    
+
                         //設定字串為日期加時間，用於檔案名稱
                         $time = date("Y_m_d_His") . $count;
                         //重新為檔案命名
@@ -183,7 +185,7 @@ function uploadFile($filesArray,$path="../../upload/",$typeString = "") {
                     if (!preg_match("/$dwg/i", $typeString)) {
                         return false ;
                     }
-                    
+
                     //設定字串為日期加時間，用於檔案名稱
                     date_default_timezone_set("Asia/Taipei");
                     $time = date("Y_m_d_His") . $count;
@@ -193,8 +195,8 @@ function uploadFile($filesArray,$path="../../upload/",$typeString = "") {
                     $filename = $val["tmp_name"];
                     //目的地+檔名
                     $destination = $path.$name;
-                    //搬移                   
-                    
+                    //搬移
+
                     move_uploaded_file($filename, $destination);
                     //組合陣列
                     $newArray[$key] = $name;
@@ -232,7 +234,7 @@ function uploadFile($filesArray,$path="../../upload/",$typeString = "") {
                     }
                     $newArray[$key] = $result;
                 }
-            }   
+            }
         }
         return $newArray ;
     }
@@ -240,7 +242,7 @@ function uploadfiles($file,$uploadPath='../../upload/docs/'){
     $fileCount = count($_FILES[$file]['name']);
     if (!file_exists($uploadPath))
         mkdir($uploadPath, 0777, true);  // 建立目錄
-    
+
     if ($fileCount>=1 and $_FILES[$file]['name'][0]!='') {
         for ($i = 0; $i < $fileCount; $i++) {
             # 檢查檔案是否上傳成功
@@ -251,7 +253,7 @@ function uploadfiles($file,$uploadPath='../../upload/docs/'){
                     $name = reset($a);
                     $ext = strtolower(end($a));
                     $_FILES[$file]['name'][$i]=$name.rand().'.'.$ext;
-                } 
+                }
                 $fileArray[$i]['File']=$_FILES[$file]['name'][$i];
                 $fileArray[$i]['Ext']=$_FILES[$file]['type'][$i];
                 $temp_file = $_FILES[$file]['tmp_name'][$i];

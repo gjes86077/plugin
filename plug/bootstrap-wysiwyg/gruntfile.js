@@ -37,7 +37,7 @@ module.exports = function (grunt) {
                 ' * Author   = ' + 'Various, see LICENCE \n' + 
                 ' * Version  = ' + 'v<%= pkg.version %> \n' +
                 ' * About    = ' + 'A tiny Bootstrap and jQuery based WYSIWYG rich text editor based on the browser function execCommand. \n' + 
-                '*/ \n\n'
+                '*/ \n'
       },
       dist: {
         files: {

@@ -61,7 +61,7 @@ switch (ADMIN_LANG) {
         break;
 }
 //require_once "../block/lang.php";
-$profile = SelectNCondition($link, 'inf');
+$profile = SelectNCondition($cn, 'inf');
 $info    = $profile[0];
 define('WEB_TITLE', $info['title']);
 ini_set('memory_limit', '256M');
