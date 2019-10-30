@@ -51,7 +51,7 @@ $('form').on('submit', function(e) {
   if ($(f).data('type') == 'formdata') {
     e.preventDefault()
     $('.preview').each(function(index) {
-      if ($(this).data('event') == 'cropper' && $(this).data('status') == 'modify') {
+      if ($(this).hasClass('cropper') && $(this).hasClass('croppered')) {
         var cropcanvas = $(this).cropper('getCroppedCanvas', {
           width: $(this).data('width'),
           height: $(this).data('height'),
@@ -109,7 +109,6 @@ $('form').on('submit', function(e) {
   dla.ajax.reload()
 })
 
-
 $('#edit').on('change', '.upl', function() {
   console.log('圖片變更')
   var input = this
@@ -118,25 +117,23 @@ $('#edit').on('change', '.upl', function() {
     var reader = new FileReader()
     reader.onload = function(e) {
       var image = PARENT.find('.preview')
-      switch (image.data('event')) {
-        case 'cropper':
-          image.data('status', 'modify')
-          var width = 0
-          var height = 0
-          width = image.data('width')
-          height = image.data('height')
-          image
-            .cropper('destroy')
-            .attr('src', e.target.result)
-            .cropper({
-              viewMode: 2,
-              aspectRatio: width / height,
-            })
-          break
-        default:
-          image.attr('src', e.target.result)
-          break
+      if (image.hasClass('cropper')) {
+        image.data('status', 'modify')
+        var width = 0
+        var height = 0
+        width = image.data('width')
+        height = image.data('height')
+        image
+          .cropper('destroy')
+          .attr('src', e.target.result)
+          .cropper({
+            viewMode: 2,
+            aspectRatio: width / height,
+          })
+      } else {
+        image.attr('src', e.target.result)
       }
+
       var KB = format_float(e.total / 1024, 2)
     }
     reader.readAsDataURL(input.files[0])
@@ -166,7 +163,7 @@ function getLatLngByAddr(addr) {
 var dla = $('.dataAjax').DataTable({
   language: {
     decimal: '',
-    emptyTable: 'No data available in table',
+    emptyTable: '查無資料',
     info: '顯示第 _START_ 至 _END_ 筆資料，共 _TOTAL_ 筆',
     infoEmpty: '顯示 0 to 0 of 0 entries',
     infoFiltered: '(filtered from _MAX_ total entries)',
@@ -216,5 +213,6 @@ function queryString() {
   }
   return query_string
 }
+
 
 </script>

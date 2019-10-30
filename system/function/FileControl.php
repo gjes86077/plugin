@@ -7,6 +7,7 @@ function wrap_img($file_data,$file_path="../../upload/",$file_name){
     $img = str_replace(' ', '+', $img);
     $data = base64_decode($img);
     file_put_contents($file_path.$file_name, $data);
+    return $file_name.'.png';
 }
 
 //UUID

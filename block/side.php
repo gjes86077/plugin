@@ -2,11 +2,11 @@
 
 function side($val)
 {
-    $filename = 'block/links.json';
+    $filename    = 'block/links.json';
     $json_string = file_get_contents($filename);
-    $list = json_decode($json_string, true);
+    $list        = json_decode($json_string, true);
     if ($val > 0) {
-        $label = '<span class="label label-dange animated flash" style="position: absolute; top: 5px;">'.$val.'</span>';
+        $label = '<span class="label label-dange animated flash" style="position: absolute; top: 5px;">' . $val . '</span>';
     }
     $admin = $_SESSION['u_rank'] > 2 ? '<div class="menu_section"><h3>系統管理員</h3><ul class="nav side-menu"><li><a href="e_commerce.html"><i class="fa fa-bug"></i> 多國語系新增鍵值</a></li></ul>
     </div>' : '';
@@ -18,17 +18,17 @@ function side($val)
           <div class="clearfix"></div>
           <div class="profile clearfix">
             <div class="profile_pic">
-              <img src="img/icon-people.png" alt="'.$_SESSION['u_name'].'" class="img-circle profile_img">
+              <img src="img/icon-people.png" alt="' . $_SESSION['u_name'] . '" class="img-circle profile_img">
             </div>
           <div class="profile_info">
             <span>Welcome,</span>
-            <h2>'.$_SESSION['u_name'].'</h2>
+            <h2>' . $_SESSION['u_name'] . '</h2>
           </div>
         </div>
         <!-- sidebar menu -->
         <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
           <div class="menu_section">
-            <h3>'.WEB_TITLE.'</h3>
+            <h3>' . WEB_TITLE . '</h3>
             <ul class="nav side-menu">';
     foreach ($list as $list_1) {
         $exist = array_key_exists('list', $list_1);
@@ -40,8 +40,8 @@ function side($val)
             echo "<ul class='nav child_menu'>\r\n";
             foreach ($list_1['list'] as $list_2) {
                 $exist = array_key_exists('list', $list_2);
-                $href = !$exist ? "href='{$list_2['php_file']}'" : '';
-                $icon = $exist ? "<span class='fa fa-chevron-down'></span>" : '';
+                $href  = !$exist ? "href='{$list_2['php_file']}'" : '';
+                $icon  = $exist ? "<span class='fa fa-chevron-down'></span>" : '';
                 echo "<li ><a {$href}>{$list_2['title']}</a>\r\n";
                 if ($exist) {
                     echo "<ul class='nav child_menu'>\r\n";
@@ -56,11 +56,11 @@ function side($val)
         }
         echo "</li>\r\n";
     }
-    echo       '
+    echo '
 
          </ul>
        </div>
-       '.$admin.'
+       ' . $admin . '
      </div>
      <!-- /sidebar menu -->
 
@@ -70,7 +70,7 @@ function side($val)
          <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
        </a>
        <a data-toggle="tooltip" data-placement="top" title="官網訊息查看" href="message.php">
-         <span class="glyphicon glyphicon-envelope" aria-hidden="true"></span>'.$label.'
+         <span class="glyphicon glyphicon-envelope" aria-hidden="true"></span>' . $label . '
        </a>
        <a data-toggle="tooltip" data-placement="top" title="Lock">
          <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>
@@ -102,28 +102,28 @@ function panel_menu()
               </ul>
               <div class="clearfix"></div>';
 }
-    function footer()
-    {
-        echo '
+function footer()
+{
+    echo '
  <!-- footer content -->
   <footer>
-   
+
       <div class="pull-right">
-'.WEB_TITLE.'
-            <a href="https://www.forestwebs.com.tw/">森德網站設計有限公司 製作</a> 
-        
+' . WEB_TITLE . '
+            <a href="https://www.forestwebs.com.tw/">森德網站設計有限公司 製作</a>
+
           </div>
-          
+
           <div class="clearfix"></div>
         </footer>
       <!-- /footer content -->';
-    }
-   function top_nav($link)
-   {
-       session_start();
-       $_SESSION[admin_lang_chinese] = $_SESSION[admin_lang] == 'zh-tw' ? '繁體中文' : '英文';
-       $result = SelectUnread($link);
-       echo '<div class="top_nav">
+}
+function top_nav($link)
+{
+    session_start();
+    $_SESSION['admin_lang_chinese'] = $_SESSION['admin_lang'] == 'zh-tw' ? '繁體中文' : '英文';
+    $result                         = SelectUnread($link);
+    echo '<div class="top_nav">
           <div class="nav_menu">
             <nav>
               <div class="nav toggle">
@@ -132,53 +132,53 @@ function panel_menu()
               <ul class="nav navbar-nav navbar-right">
                 <li class="">
                   <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                    <img src="img/icon-people.png" alt="">'.$_SESSION['u_name'].'
+                    <img src="img/icon-people.png" alt="">' . $_SESSION['u_name'] . '
                     <span class=" fa fa-angle-down"></span>
                   </a>
-                  
+
                   <ul class="dropdown-menu dropdown-usermenu pull-right">
-                 
+
                     <li><a href="user.php"><i class="glyphicon glyphicon-user pull-right"></i>成員管理</a></li>
-                    <li><a href="../index.php" target="_blank"><i class="glyphicon glyphicon-eye-open pull-right"></i>瀏覽網頁</a></li>                    
+                    <li><a href="../index.php" target="_blank"><i class="glyphicon glyphicon-eye-open pull-right"></i>瀏覽網頁</a></li>
                     <li><a href="control/logout.php"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
                   </ul>
                 </li>
                <li class="">
                   <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                  '.$_SESSION[admin_lang_chinese].'
+                  ' . $_SESSION['admin_lang_chinese'] . '
                     <span class=" fa fa-angle-down"></span>
                   </a>
-                  
+
                   <ul class="dropdown-menu dropdown-usermenu pull-right">
                   <li ><a href="?admin_lang=zh-tw"> 繁中設定</a></li>
-                  <li ><a href="?admin_lang=en-us"> 英文設定</a></li>
-                  
+                  <!--<li ><a href="?admin_lang=en-us"> 英文設定</a></li>-->
+
                   </ul>
                 </li>
 
                 <li role="presentation" class="dropdown">
                   <a href="javascript:;" class="dropdown-toggle info-number" data-toggle="dropdown" aria-expanded="false">
                     <i class="fa fa-envelope-o"></i>';
-       if (MessageCount($link) > 0) {
-           echo '<span class="badge bg-green">'.MessageCount($link).'</span>';
-       }
-       echo '</a>
+    if (MessageCount($link) > 0) {
+        echo '<span class="badge bg-green">' . MessageCount($link) . '</span>';
+    }
+    echo '</a>
                   <ul id="menu1" class="dropdown-menu list-unstyled msg_list" role="menu">';
-       foreach ($result as $unread) {
-           echo '<li>
+    foreach ($result as $unread) {
+        echo '<li>
                       <a>
                         <span class="image"><img src="system/images/user.png" alt="Profile Image" /></span>
                         <span>
-                          <span>'.$unread['name'].'</span>
-                          <span class="time">'.CheckTime($unread['crt_date']).'</span>
+                          <span>' . $unread['name'] . '</span>
+                          <span class="time">' . CheckTime($unread['crt_date']) . '</span>
                         </span>
                         <span class="message">
-                         '.$unread['content'].'
+                         ' . $unread['content'] . '
                         </span>
                       </a>
                     </li>';
-       }
-       echo '<li>
+    }
+    echo '<li>
                       <div class="text-center">
                         <a href="message.php">
                           <strong>See All Messages</strong>
@@ -192,4 +192,4 @@ function panel_menu()
             </nav>
           </div>
         </div>';
-   }
+}

@@ -5,27 +5,13 @@
     "fa": "leaf"
   },
   {
-    "title": "首頁",
-    "php_file": "",
-    "fa": "home",
-    "list": [
-      {
-        "title": "橫幅管理",
-        "php_file": "Banner.php"
-      },
-      {
-        "title": "介紹區塊編輯",
-        "list": [
-          {
-            "title": "地景輪播照片",
-            "php_file": "carousel.php"
-          },
-          {
-            "title": "簡介及 Youtube 連結",
-            "php_file": "index_btm.php"
-          }
-        ]
-      }
-    ]
+    "title": "首頁橫幅管理",
+    "php_file": "banner.php",
+    "fa": "home"
+  },
+  {
+    "title": "關於我們",
+    "php_file": "about.php",
+    "fa": "info-circle"
   }
 ]

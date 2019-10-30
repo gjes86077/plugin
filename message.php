@@ -3,16 +3,16 @@
   require_once  "block/side.php";
     if(!checkAdmin())
     HEADER('Location:login.php');
-  $table='contact';
-  $result= SelectNConditionOrder($cn,$table,array("crt_date"=>"desc"));
-  $title='官網訊息';
-  $amount=10; //一頁幾筆
-  $totalData  = count($result);       //資料總數
-  $totalPage  = ceil($totalData/$amount);   //總頁數
-  $control_file='message.php';
+  $table        = 'contact';
+  $result       = SelectNConditionOrder($cn,$table,["created_at"=>"desc"]);
+  $title        = '官網訊息';
+  $amount       = 10; //一頁幾筆
+  $totalData    = count($result);       //資料總數
+  $totalPage    = ceil($totalData/$amount);   //總頁數
+  $control_file = 'message.php';
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-tw">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <!-- Meta, title, CSS, favicons, etc. -->
@@ -54,49 +54,6 @@
             <!-- End to do list -->
             <div class="col-xs-12">
               <!-- 信件編輯區塊 -->
-              <div class="x_panel " id="edit">
-                  <div class="x_title">
-                    <h2>回覆訊息
-                      <small></small>
-                    </h2>
-                    <?panel_menu()?>
-                  </div>
-                  <div class="x_content">
-                    <br />
-                    <form id="form_id" data-parsley-validate class="form-horizontal form-label-left" method="post" enctype="multipart/form-data">
-
-                      <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12">文章置於首頁</label>
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-                          <div class="checkbox">
-                            <label class="form-control" id="send"></label>
-                              <input type="hidden" id="send_to" name="send_to" value="">
-                            </label>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="content">信件內容<span class="required">*</span>
-                        </label>
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-                          <textarea name="content" id="content" cols="30" rows="10" class="ckeditor"></textarea>
-                        </div>
-                      </div>
-
-                  <div class="clearfix"></div>
-
-                      <div class="form-group">
-                        <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
-                          <button class="btn btn-danger" type="button" onclick="list()" >取消</button>
-                          <button class="btn btn-primary" type="reset">重填</button>
-                          <button type="submit" class="btn btn-success" id="form_btn">發佈</button>
-                        </div>
-                      </div>
-                    </form>
-                  </div>
-                </div>
-
-                <!-- 信件編輯區塊 -->
               <div class="x_panel" id="list">
                 <div class="x_title">
                   <h2>訊息瀏覽 </h2>
@@ -105,36 +62,34 @@
                 </div>
                 <div class="x_content">
                   <ul class="list-unstyled msg_list">
-                    <?php foreach ($result as $mes):
+<?php foreach ($result as $mes):
     $label = $mes['read'] == 0 ? '<span class="label label-danger">未讀</span>' : '';
     ?>
-
-			                    <li>
-			                        <div class="col-md-1 col-xs-12"><img src="system/images/user.png" alt="img" />
-
-			                        </div>
-			                        <div class="col-md-2 col-xs-12">
-			                          <div class="row">
-			                            <div class="col-xs-12">姓　　名：<?=$mes['name']?></div>
-			                            <div class="col-xs-12">聯絡電話：<?=$mes['phone']?></div>
-			                            <div class="col-xs-12">電子信箱：<?=$mes['email']?></div>
-			                            <div class="col-xs-12">
-			                              <button class="btn btn-danger" onclick="del(<?=$mes['id']?>)">刪除</button>
-			                              <button class="btn btn-warning" onclick="update(<?=$mes['id']?>)">回覆</button>
-			                            </div>
-			                          </div>
-			                        </div>
-			                        <div class="col-md-9 col-xs-12">
-			                          <span class="time"><?=$label?><?=CheckTime($mes['crt_date'])?></span>
-			                          <p class="message">
-			                             <?=($mes['title'])?>
-			                          </p>
-			                          <p class="message">
-			                             <?=nl2br($mes['content'])?>
-			                          </p>
-			                        </div>
-			                    </li>
-			                    <?php endforeach?>
+	                  <li>
+	                    <div class="col-md-1 col-xs-12">
+	                      <img src="system/images/user.png" alt="img" />
+	                    </div>
+	                    <div class="col-md-2 col-xs-12">
+	                      <div class="row">
+	                        <div class="col-xs-12">姓　　名：<?=$mes['name']?></div>
+	                        <div class="col-xs-12">聯絡電話：<?=$mes['phone']?></div>
+	                        <div class="col-xs-12">電子信箱：<?=$mes['email']?></div>
+	                        <div class="col-xs-12">
+	                          <button class="btn btn-danger" onclick="del(<?=$mes['id']?>)">刪除</button>
+	                        </div>
+	                      </div>
+	                    </div>
+	                  <div class="col-md-9 col-xs-12">
+	                  <span class="time"><?=$label?><?=CheckTime($mes['crt_date'])?></span>
+	                  <p class="message">
+	                  <?=($mes['title'])?>
+	                  </p>
+	                  <p class="message">
+	                  <?=nl2br($mes['content'])?>
+	                  </p>
+	                  </div>
+	                  </li>
+	                  <?php endforeach?>
                   </ul>
                 </div>
               </div>

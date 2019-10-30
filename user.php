@@ -4,7 +4,7 @@
     HEADER('Location:login.php');
 
   $table='user';
-  $result= SelectCustom($cn,'Select * from user where account !="forest"');
+  $result= SelectCustom($cn,'Select * from user where account != "forest"');
   $control_file='user.php';
 
   $title='成員管理';
@@ -160,11 +160,11 @@
     <script src="system/js/custom.min.js"></script>
     <script>
 
-controlUrl = 'control/<?php echo $control_file; ?>'
-function func_afterEditing(){
-Swal.fire('已儲存');
-dla.ajax().reload()
-}
+    controlUrl = 'control/<?php echo $control_file; ?>'
+    function func_afterEditing(){
+    Swal.fire('已儲存');
+    dla.ajax().reload()
+    }
       function insert() {
         type = '<?=$_GET['type']?>';
         $("#id").val(id);

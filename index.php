@@ -1,22 +1,16 @@
-<? 
-  require_once  "system/config.php";  
+<?
+  require_once  "system/config.php";
   if(!checkAdmin())
     HEADER('Location:login.php');
-  $table='article';
-  $type=$_GET['type'];
-  
-  $amount=10; //一頁幾筆
-  $totalData  = count($result);       //資料總數
-  $totalPage  = ceil($totalData/$amount);   //總頁數
 ?>
 <!DOCTYPE html>
-<html lang="ZH-TW">
+<html lang="zh-tw">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <!-- Meta, title, CSS, favicons, etc. -->
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">	  
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title><?=WEB_TITLE?>  | 森德網站設計有限公司 </title>
     <!-- Bootstrap -->
     <link href="plug/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -61,7 +55,7 @@
           <div class="">
             <div class="page-title">
               <div class="title_left">
-              </div>              
+              </div>
             </div>
             <div class="clearfix"></div>
             <div class="row">
@@ -119,6 +113,6 @@
     <!-- Custom Theme Scripts -->
     <script src="system/js/custom.min.js"></script>
     <script>
-    </script>	
+    </script>
   </body>
 </html>

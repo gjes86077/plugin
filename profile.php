@@ -137,18 +137,7 @@
     </div>
 
     <!-- CKEdit -->
-    <script src="plug/CKEdit/ckeditor/ckeditor.js"></script>
-    <!-- jQuery -->
-    <script src="plug/jquery.min.js"></script>
-    <!-- Bootstrap -->
-    <script src="plug/bootstrap/dist/js/bootstrap.js"></script>
-    <!-- validator -->
-    <script src="plug/validator/validator.js"></script>
-    <!-- bootstrap-daterangepicker -->
-    <script src="plug/moment/min/moment.min.js"></script>
-    <script src="plug/bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script>
-    <!-- Custom Theme Scripts -->
-    <script src="system/js/custom.min.js"></script>
+    <?require_once "block/js.php"?>
     <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC6R-j6QUGy31AmQSwOMonQo-y7leSviBg"></script>
     <script>
     $(function(){
