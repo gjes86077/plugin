@@ -43,7 +43,7 @@ function video_id($url)
     }
     return $url;
 }
-function fileimg($filesKey_key,$db_name,$path="../../upload/",$img="img"){
+function fileimg($filesKey_key,$img="img",$path="../../upload/"){
     $post=$_POST;
     $filesKey   = array($filesKey_key);
     $filesArray   = $_FILES;
@@ -84,11 +84,10 @@ function fileimg($filesKey_key,$db_name,$path="../../upload/",$img="img"){
     }
     $post = array_merge($post,$filesArray);
     if(array_key_exists($filesKey_key, $post)){
-        $post[$img]=$post[$filesKey_key];
-        $img_tb=SelectCondition($link,$db_name,'id',$post['id']);
-        $path="../../upload/".$img_tb[0][$img];
+        $path=$path.$post[$img];
         if(file_exists($path))
         {unlink($path);}
+        $post[$img]=$post[$filesKey_key];
     }
     else
     {
