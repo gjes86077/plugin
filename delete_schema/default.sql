@@ -20,6 +20,15 @@ CREATE TABLE IF NOT EXISTS `banner` (
   PRIMARY KEY (`id`)
 ) COLLATE='utf8mb4_unicode_ci' ; 
 
+CREATE TABLE IF NOT EXISTS `meta` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `page` varchar(50) NOT NULL ,
+  `title` varchar(50) NOT NULL ,
+  `keywords` varchar(100)  ,
+  `description` varchar(500)  ,
+  PRIMARY KEY (`id`)
+) COLLATE='utf8mb4_unicode_ci' ; 
+
 -- 正在傾印表格  banner 的資料：~1 rows (約數)
 /*!40000 ALTER TABLE `banner` DISABLE KEYS */;
 

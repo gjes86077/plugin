@@ -90,7 +90,6 @@ function uploadFile($file, $path = "../../upload/", $allowType = "")
                     "msg"    => "不允許 {$dwg} 格式，僅允許上傳 {$errorMsg} 檔案格式。",
                     'status' => false,
                 ];
-
             }
 
             //設定字串為日期加時間，用於檔案名稱
