@@ -1,16 +1,16 @@
-<?
-  require_once  "system/config.php";
-    if(!checkAdmin())
+<?php
+require_once "system/config.php";
+if (!checkAdmin()) {
     HEADER('Location:login.php');
+}
 
-  $table='user';
-  $result= SelectCustom($cn,'Select * from user where account != "forest"');
-  $control_file='user.php';
-
-  $title='成員管理';
-  $amount=10; //一頁幾筆
-  $totalData  = count($result);       //資料總數
-  $totalPage  = ceil($totalData/$amount);   //總頁數
+$table        = 'user';
+$result       = SelectCustom($cn, 'Select * from user where account != "forest"');
+$control_file = 'user.php';
+$title        = '成員管理';
+$amount       = 10; //一頁幾筆
+$totalData    = count($result); //資料總數
+$totalPage    = ceil($totalData / $amount); //總頁數
 ?>
 <!DOCTYPE html>
 <html lang="ZH-TW">

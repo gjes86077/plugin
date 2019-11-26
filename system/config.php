@@ -1,5 +1,4 @@
 <?php
-
 session_start();
 error_reporting(E_ERROR | E_PARSE);
 $local = ['localhost.original', '127.0.0.1', 'localhost'];

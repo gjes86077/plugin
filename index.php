@@ -1,7 +1,9 @@
-<?
-  require_once  "system/config.php";
-  if(!checkAdmin())
+<?php
+require_once "system/config.php";
+if (!checkAdmin()) {
     HEADER('Location:login.php');
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="zh-tw">

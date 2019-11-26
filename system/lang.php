@@ -1,4 +1,1 @@
-<?
-session_start();
 
-?>

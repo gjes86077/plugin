@@ -1,10 +1,10 @@
-<?
-  require_once  "system/config.php";
-  //已登入跳至首頁
-  if(checkAdmin()){
+<?php
+require_once "system/config.php";
+//已登入跳至首頁
+if (checkAdmin()) {
     header("location:index.php");
     exit();
-  }
+}
 ?>
 <!DOCTYPE html>
 <html lang="zh-TW">

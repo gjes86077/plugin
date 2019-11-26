@@ -1,10 +1,12 @@
-<?
-  require_once  "system/config.php";
-    if(!checkAdmin())
+<?php
+require_once "system/config.php";
+if (!checkAdmin()) {
     HEADER('Location:login.php');
-  $title="網站設定";
-  $result=SelectNCondition($cn,'inf');
-  $res=$result[0];
+}
+
+$title  = "網站設定";
+$result = SelectNCondition($cn, 'inf');
+$res    = $result[0];
 ?>
 <!DOCTYPE html>
 <html lang="en">
