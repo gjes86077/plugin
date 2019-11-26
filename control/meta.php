@@ -44,7 +44,8 @@ function update($cn)
     UpdateByCustom($cn, TABLE_NAME, post_array(), ['page' => $p['type']]) :
     InsertOne($cn, TABLE_NAME, post_array());
     if ($result) {
-        backPrevPage();
+        // backPrevPage();
+        echo json_encode(['status' => true]);
         exit();
     } else {
         echo "ERROR:資料未更新";
