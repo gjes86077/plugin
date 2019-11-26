@@ -48,62 +48,70 @@
 <script>
 $('form').on('submit', function(e) {
   var f = e.target
-  if ($(f).data('type') == 'formdata') {
-    e.preventDefault()
-    $('.preview').each(function(index) {
-      if ($(this).hasClass('cropper') && $(this).hasClass('croppered')) {
-        var cropcanvas = $(this).cropper('getCroppedCanvas', {
-          width: $(this).data('width'),
-          height: $(this).data('height'),
-        })
-        var croppng = cropcanvas.toDataURL('image/png', 0.5)
-        $(this)
-          .prev()
-          .val(croppng)
-      }
-    })
-    var formData = new FormData(f),
-      $action = $(f).attr('action')
-    var qstr = '',
-      flag = 0,
-      errorMsg = '',
-      key
-    //登入欄位判斷
-    $(f)
-      .find('.req')
-      .each(function() {
-        if ($(this).val() == '') {
-          Swal.fire({
-            text: '請檢查必填欄位是否完成',
-            type: 'error',
-            showConfirmButton: false,
-            cancelButtonText: '關閉',
-            showCancelButton: true,
+  var status = true
+  if (typeof func_beforeEditing === 'function') {
+    status = func_beforeEditing()
+  }
+  if (status) {
+    if ($(f).data('type') == 'formdata') {
+      e.preventDefault()
+      $('.preview').each(function(index) {
+        if ($(this).hasClass('cropper') && $(this).hasClass('croppered')) {
+          var cropcanvas = $(this).cropper('getCroppedCanvas', {
+            width: $(this).data('width'),
+            height: $(this).data('height'),
           })
+          var croppng = cropcanvas.toDataURL('image/png', 0.5)
+          $(this)
+            .prev()
+            .val(croppng)
         }
       })
-    formData.append('action', $action)
-    for (key in formData.entries()) {
-      if (formData.getAll(key)) {
-        qstr += key[0] + '=' + key[1] + '&'
+      var formData = new FormData(f),
+        $action = $(f).attr('action')
+      var qstr = '',
+        flag = 0,
+        errorMsg = '',
+        key
+      //登入欄位判斷
+      $(f)
+        .find('.req')
+        .each(function() {
+          if ($(this).val() == '') {
+            Swal.fire({
+              text: '請檢查必填欄位是否完成',
+              type: 'error',
+              showConfirmButton: false,
+              cancelButtonText: '關閉',
+              showCancelButton: true,
+            })
+          }
+        })
+      formData.append('action', $action)
+      for (key in formData.entries()) {
+        if (formData.getAll(key)) {
+          qstr += key[0] + '=' + key[1] + '&'
+        }
       }
-    }
-    $('.ckeditor').each(function() {
-      formData.delete($(this).attr('name'))
-      formData.append($(this).attr('name'), CKEDITOR.instances[$(this).attr('id')].getData())
-    })
-    xhr = new XMLHttpRequest()
-    xhr.overrideMimeType('application/json')
-    xhr.open($(f).attr('method'), $(f).attr('action'))
-    xhr.onload = function() {
-      var json = JSON.parse(xhr.responseText)
-      eval('func_afterEditing(json)')
+      $('.ckeditor').each(function() {
+        formData.delete($(this).attr('name'))
+        formData.append($(this).attr('name'), CKEDITOR.instances[$(this).attr('id')].getData())
+      })
+      xhr = new XMLHttpRequest()
+      xhr.overrideMimeType('application/json')
+      xhr.open($(f).attr('method'), $(f).attr('action'))
+      xhr.onload = function() {
+        var json = JSON.parse(xhr.responseText)
+        if (typeof func_afterEditing === 'function') {
+          eval('func_afterEditing(json)')
+        }
 
-      // eval('func_' + $action + '(json)')
-      // $('.loading').show()
-    }
-    if (confirm('是否確認送出？')) {
-      xhr.send(formData)
+        // eval('func_' + $action + '(json)')
+        // $('.loading').show()
+      }
+      if (confirm('是否確認送出？')) {
+        xhr.send(formData)
+      }
     }
   }
   dla.ajax.reload()
@@ -160,6 +168,9 @@ function getLatLngByAddr(addr) {
     }
   )
 }
+if (typeof getList === 'undefined') {
+  getList = 'getList'
+}
 var dla = $('.dataAjax').DataTable({
   language: {
     decimal: '',
@@ -186,7 +197,7 @@ var dla = $('.dataAjax').DataTable({
     },
   },
   ajax: {
-    url: 'control/<?=$control_file?>?action=getList',
+    url: 'control/<?=$control_file?>?action=' + getList,
     data: { type: '<?=$type?>' },
   },
   order: [],
@@ -213,6 +224,5 @@ function queryString() {
   }
   return query_string
 }
-
 
 </script>

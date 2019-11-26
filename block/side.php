@@ -10,7 +10,7 @@ function side($val)
     }
     $admin = $_SESSION['u_rank'] > 2 ? '<div class="menu_section"><h3>系統管理員</h3><ul class="nav side-menu"><li><a href="e_commerce.html"><i class="fa fa-bug"></i> 多國語系新增鍵值</a></li></ul>
     </div>' : '';
-    echo '<div class="col-md-3 left_col ">
+    echo '<div class="col-md-3 left_col">
   <div class="left_col scroll-view">
           <div class="navbar nav_title" style="border: 0;">
             <a href="index.php" class="site_title"></a>
@@ -57,31 +57,29 @@ function side($val)
         echo "</li>\r\n";
     }
     echo '
-
-         </ul>
-       </div>
-       ' . $admin . '
-     </div>
-     <!-- /sidebar menu -->
-
-     <!-- /menu footer buttons -->
-     <div class="sidebar-footer hidden-small">
-       <a data-toggle="tooltip" data-placement="top" title="成員管理" href="user.php">
-         <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
-       </a>
-       <a data-toggle="tooltip" data-placement="top" title="官網訊息查看" href="message.php">
-         <span class="glyphicon glyphicon-envelope" aria-hidden="true"></span>' . $label . '
-       </a>
-       <a data-toggle="tooltip" data-placement="top" title="Lock">
-         <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>
-       </a>
-       <a data-toggle="tooltip" data-placement="top" title="登出" href="control/logout.php">
-            <span class="fa fa-sign-out" aria-hidden="true"></span>
-          </a>
-        </div>
-        <!-- /menu footer buttons -->
-      </div>
-    </div>';
+    </ul>
+  </div>
+  ' . $admin . '
+    </div>
+    <!-- /sidebar menu -->
+    <!-- /menu footer buttons -->
+    <div class="sidebar-footer hidden-small">
+      <a data-toggle="tooltip" data-placement="top" title="成員管理" href="user.php">
+        <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+      </a>
+      <a data-toggle="tooltip" data-placement="top" title="官網訊息查看" href="message.php">
+        <span class="glyphicon glyphicon-envelope" aria-hidden="true"></span>' . $label . '
+      </a>
+      <a data-toggle="tooltip" data-placement="top" title="Lock">
+        <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>
+      </a>
+      <a data-toggle="tooltip" data-placement="top" title="登出" href="control/logout.php">
+        <span class="fa fa-sign-out" aria-hidden="true"></span>
+      </a>
+    </div>
+    <!-- menu footer buttons -->
+    </div>
+  </div>';
 }
 function panel_menu()
 {
@@ -105,17 +103,14 @@ function panel_menu()
 function footer()
 {
     echo '
- <!-- footer content -->
-  <footer>
-
+    <!-- footer content -->
+    <footer>
       <div class="pull-right">
-' . WEB_TITLE . '
-            <a href="https://www.forestwebs.com.tw/">森德網站設計有限公司 製作</a>
-
-          </div>
-
-          <div class="clearfix"></div>
-        </footer>
+      ' . WEB_TITLE . '
+        <a href="https://www.forestwebs.com.tw/">森德網站設計有限公司 製作</a>
+      </div>
+      <div class="clearfix"></div>
+      </footer>
       <!-- /footer content -->';
 }
 function top_nav($link)
@@ -135,27 +130,22 @@ function top_nav($link)
                     <img src="img/icon-people.png" alt="">' . $_SESSION['u_name'] . '
                     <span class=" fa fa-angle-down"></span>
                   </a>
-
                   <ul class="dropdown-menu dropdown-usermenu pull-right">
-
                     <li><a href="user.php"><i class="glyphicon glyphicon-user pull-right"></i>成員管理</a></li>
                     <li><a href="../index.php" target="_blank"><i class="glyphicon glyphicon-eye-open pull-right"></i>瀏覽網頁</a></li>
                     <li><a href="control/logout.php"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
                   </ul>
                 </li>
-               <li class="">
+                <li class="">
                   <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
                   ' . $_SESSION['admin_lang_chinese'] . '
                     <span class=" fa fa-angle-down"></span>
                   </a>
-
                   <ul class="dropdown-menu dropdown-usermenu pull-right">
                   <li ><a href="?admin_lang=zh-tw"> 繁中設定</a></li>
                   <!--<li ><a href="?admin_lang=en-us"> 英文設定</a></li>-->
-
                   </ul>
                 </li>
-
                 <li role="presentation" class="dropdown">
                   <a href="javascript:;" class="dropdown-toggle info-number" data-toggle="dropdown" aria-expanded="false">
                     <i class="fa fa-envelope-o"></i>';
@@ -163,33 +153,33 @@ function top_nav($link)
         echo '<span class="badge bg-green">' . MessageCount($link) . '</span>';
     }
     echo '</a>
-                  <ul id="menu1" class="dropdown-menu list-unstyled msg_list" role="menu">';
+    <ul id="menu1" class="dropdown-menu list-unstyled msg_list" role="menu">';
     foreach ($result as $unread) {
         echo '<li>
-                      <a>
-                        <span class="image"><img src="system/images/user.png" alt="Profile Image" /></span>
-                        <span>
-                          <span>' . $unread['name'] . '</span>
-                          <span class="time">' . CheckTime($unread['crt_date']) . '</span>
-                        </span>
-                        <span class="message">
-                         ' . $unread['content'] . '
-                        </span>
-                      </a>
-                    </li>';
+                <a>
+                  <span class="image"><img src="system/images/user.png"  /></span>
+                  <div>
+                    <span>' . $unread['name'] . '</span>
+                    <span class="time">' . CheckTime($unread['crt_date']) . '</span>
+                  </div>
+                  <span class="message">
+                  ' . $unread['content'] . '
+                  </span>
+                </a>
+              </li>';
     }
     echo '<li>
-                      <div class="text-center">
-                        <a href="message.php">
-                          <strong>See All Messages</strong>
-                          <i class="fa fa-angle-right"></i>
-                        </a>
-                      </div>
-                    </li>
-                  </ul>
-                </li>
-              </ul>
-            </nav>
-          </div>
-        </div>';
+              <div class="text-center">
+                <a href="message.php">
+                  <strong>See All Messages</strong>
+                  <i class="fa fa-angle-right"></i>
+                </a>
+              </div>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</div>';
 }
