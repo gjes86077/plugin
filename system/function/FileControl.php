@@ -8,7 +8,7 @@ function wrap_img($file_data, $file_path = "../../upload/", $file_name)
     $img       = str_replace(' ', '+', $img);
     $data      = base64_decode($img);
     file_put_contents($file_path . $file_name, $data);
-    return $file_name . '.png';
+    return $file_name;
 }
 
 //UUID
@@ -54,15 +54,13 @@ function uploading($filesKey, $org = "original", $path = "../../upload/")
         if ($uploadResult['status']) {
             $fileName = $uploadResult['fileName'];
             //刪除舊檔案
-            if (file_exists($path . $org)) {
-                unlink($path . $org);
+            if (file_exists($path . $P[$org])) {
+                unlink($path . $P[$org]);
             }
-
         } else {
             echo json_encode($uploadResult);
             exit;
         }
-
     } else {
         // 無上傳任何檔案則回傳原始值
         $fileName = $P[$org];
@@ -74,10 +72,10 @@ function uploadFile($file, $path = "../../upload/", $allowType = "")
 {
     $allowType = empty($allowType) ? "gif,jpe,jpeg,jpg,png,pdf,doc,docx,xls,xlsx" : $allowType;
     $allowType = explode(",", $allowType);
+    // 建立目錄
     if (!file_exists($path)) {
         mkdir($path, 0777, true);
     }
-    // 建立目錄
     if (!is_array($file["error"])) {
         if ($file["error"] == 0) {
             //取出副檔名
@@ -91,8 +89,6 @@ function uploadFile($file, $path = "../../upload/", $allowType = "")
                     'status' => false,
                 ];
             }
-
-            //設定字串為日期加時間，用於檔案名稱
             $fileName    = uuid('file');
             $fileName    = "{$fileName}.{$dwg}";
             $tmp         = $file["tmp_name"];
@@ -105,7 +101,6 @@ function uploadFile($file, $path = "../../upload/", $allowType = "")
                     "msg"    => "檔案傳送期間出現錯誤。",
                     'status' => false,
                 ];
-
             }
             chmod($destination, 755);
             //組合陣列
@@ -113,8 +108,6 @@ function uploadFile($file, $path = "../../upload/", $allowType = "")
                 "fileName" => $fileName,
                 'status'   => true,
             ];
-
-            //$count++;
         } else {
             $result['status'] = false;
             switch ($file["error"]) {

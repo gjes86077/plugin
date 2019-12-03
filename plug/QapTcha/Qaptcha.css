@@ -1,0 +1,61 @@
+/* 拉拉霸 */
+.lalabar{
+/* display: inline-block; */
+/* margin: 10px 0; */
+  padding-top:5px
+}
+.QapTcha {
+  position: relative;
+  width: 100%;
+  padding: 0px;
+  margin: 0 auto;
+  border-radius: 0px;
+  background-color: #eee;
+  border: 1px solid #cccccc;
+  border-radius:3px
+}
+.QapTcha .bgSlider {
+  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -ms-box-sizing: border-box;
+  height: 35px;
+  border-radius: 0px;
+  padding: 0;
+  border: none;
+
+}
+.QapTcha .Slider {
+  position: relative;
+  top: 0px;
+  left: 0px;
+  width:36px;
+  height:36px;
+  z-index: 99;
+  cursor: pointer;
+  background-image: url('../../img/qaptcha-lock.png');
+  background-repeat: no-repeat;
+  background-size:cover;
+  border-radius:5px;
+  border:solid 1px #4D4B4B ;
+  margin-left:-1px;
+  margin-top:-1px;
+}
+/* 
+.QapTcha .Slider{
+  background-image: url('../../img/qaptcha-lock.png');
+  background-position: no-repeat;
+} 
+*/
+.QapTcha .dropSuccess,
+.QapTcha .dropError {
+  color:#73879c;
+  position: absolute;
+  left:70px;
+  top: 0;
+  line-height: 35px;
+  text-align: center;
+  font-size: 14px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+}

@@ -56,7 +56,8 @@ function CheckTime($val)
 function LogOutAdmin()
 {
     session_start();
-    session_destroy(); //清空session
+    session_destroy();
+    //清空session
     return true;
 }
 //密碼處理
@@ -70,27 +71,33 @@ function password_salt($ac, $pw)
 function CheckLogin($link, $account, $password)
 {
     session_start();
-    $password = password_salt($account, $password);
-    //確認帳號是否存在
-    $query        = "SELECT * FROM `user` WHERE account='$account' ";
-    $result       = mysqli_query($link, $query);
-    $checkAccount = mysqli_num_rows($result); //資料筆數
-    $check        = mysqli_fetch_assoc($result);
-    if ($checkAccount != 1) {
-        //帳號不存在
-        return 10;
-    } elseif ($check['is_open'] != 0) {
-        //帳號已經鎖."<br>"
-        return 11;
-    } elseif (!($password == $check['password'])) {
-        return 12;
-    } else {
-        $_SESSION['is_user'] = true;
-        $_SESSION['u_id']    = $check['account'];
-        $_SESSION['u_name']  = $check['name'];
-        $_SESSION['u_rank']  = $check['rank'];
+    // var_dump($_POST, $_SESSION);exit();
+    if (isset($_POST[$_SESSION['adminVertifyCode']])) {
+        $password = password_salt($account, $password);
 
-        return 0;
+        //確認帳號是否存在
+        $query        = "SELECT * FROM `user` WHERE account='$account' ";
+        $result       = mysqli_query($link, $query);
+        $checkAccount = mysqli_num_rows($result);
+        //資料筆數
+        $check = mysqli_fetch_assoc($result);
+        if ($checkAccount != 1) {
+            //帳號不存在
+            return 10;
+        } elseif ($check['is_open'] != 0) {
+            //帳號已經鎖."<br>"
+            return 11;
+        } elseif (!($password == $check['password'])) {
+            return 12;
+        } else {
+            $_SESSION['is_user'] = true;
+            $_SESSION['u_id']    = $check['account'];
+            $_SESSION['u_name']  = $check['name'];
+            $_SESSION['u_rank']  = $check['rank'];
+            return 0;
+        }
+    } else {
+        return 99;
     }
 }
 //登出 FOR 後台
@@ -113,7 +120,6 @@ function checkConvey($dataArray, $keyArray)
             }
         }
     }
-
     return true;
 }
 
@@ -127,7 +133,6 @@ function checkKey($dataArray, $keyArray)
         }
         $dataArray = $dataArray2;
     }
-
     return $dataArray;
 }
 
@@ -141,7 +146,6 @@ function checkSqlInjection($dataArray)
     } else {
         $dataArray = str_replace("'", "\'", str_replace(';', "\;", str_replace("\*", '', str_replace('--', '', $dataArray))));
     }
-
     return $dataArray;
 }
 
@@ -153,7 +157,6 @@ function checkHtmlPhpTag($dataArray, $exceptionString = false)
             $exceptionArray = explode(',', $exceptionString);
             foreach ($dataArray as $key => $val) {
                 if (!in_array($key, $exceptionArray)) {
-                    // $val    = preg_replace('/<([^<>]*)>/', '&lt;\1&gt;', $val);
                     $val             = htmlspecialchars($val, ENT_QUOTES);
                     $val             = preg_replace('/[Jj][Aa][Vv][Aa][Ss][Cc][Rr][Ii][Pp][Tt]/', '', $val);
                     $dataArray[$key] = $val;
@@ -170,7 +173,6 @@ function checkHtmlPhpTag($dataArray, $exceptionString = false)
         $dataArray = preg_replace('/<([^<>]*)>/', '&lt;\1&gt;', $dataArray);
         $dataArray = preg_replace('/[Jj][Aa][Vv][Aa][Ss][Cc][Rr][Ii][Pp][Tt]/', '', $dataArray);
     }
-    //         $val = preg_replace('/<([^<>]*)>/', '&lt;\1&gt;', $val);
     return $dataArray;
 }
 
@@ -214,10 +216,8 @@ function checkIsMobile()
     $regex_match .= "symbian|smartphone|midp|wap|phone|windows ce|iemobile|^spice|^bird|^zte\-|longcos|pantech|gionee|^sie\-|portalmmm|";
     $regex_match .= "jig\s browser|hiptop|^ucweb|^benq|haier|^lct|opera\s*mobi|opera\*mini|320x320|240x320|176x220|iPad";
     $regex_match .= ')/i';
-
     return preg_match($regex_match, strtolower($_SERVER['HTTP_USER_AGENT']));
 }
-
 //會員需登入  (cookie)
 function memberIn()
 {
@@ -246,6 +246,7 @@ function checkNotMobile($phone)
 /*
  * 導頁function(暫放)================================================
  */
+
 //回上一頁
 function backPrevPage()
 {

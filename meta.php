@@ -40,8 +40,8 @@ $control_file = 'meta.php';
                     <div class="clearfix"></div>
                   </div>
                   <div class="x_content">
-                    <form class="form-horizontal form-label-left" action="control/meta.php?action=update" method="post" enctype="multipart/form-data" >
-                      <input type="hidden" name="type" value='<?=$type?>'>
+                    <form class="form-horizontal form-label-left" action="control/meta.php?action=update" method="post" enctype="multipart/form-data"  data-type='formdata'  >
+                      <input type="hidden" name="page" value='<?=$page?>'>
 
                       <div class="item form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="description">頁面標題 <span class="required">*</span>

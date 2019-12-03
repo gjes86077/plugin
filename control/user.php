@@ -82,7 +82,7 @@ function getId($cn, $type = '')
     $id = checkHtmlPhpTag($id);
 
     $tableName = 'user';
-    $result    = Select1Condition($cn, $tableName, 'id', $id);
+    $result    = Select1Condition($cn, $tableName, ['id' => $id]);
     echo json_encode($result);
 }
 function delete($cn)

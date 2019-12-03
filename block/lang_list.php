@@ -1,4 +1,4 @@
-<?
+<?php
   $control_file='lang_list.php';   
   $table='lang_data';
   $result=SelectCustom($link,"Select * from $table where lang='zh-tw' and `key` like '$where%' order by `key` ");  

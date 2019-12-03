@@ -154,7 +154,7 @@
 
 <table align="center" border="0" cellpadding="0" cellspacing="0">
 <tr><td>
-<?
+<?php
    if(isset($_REQUEST['issubmit'])){
       echo "<strong>form is sumbitted</strong>";
    }

@@ -10,7 +10,7 @@ if (isset($_GET["action"]) && function_exists($_GET["action"])) {
 }
 function keyarray()
 {
-    $key = array("type", 'description', "keywords", 'title');
+    $key = array("page", 'description', "keywords", 'title');
     return $key;
 }
 function post_array($i = '')
@@ -30,7 +30,7 @@ function post_array($i = '')
         'title'       => $post['title'],
         'keywords'    => $post['keywords'],
         'description' => $post['description'],
-        'page'        => $post['type'],
+        'page'        => $post['page'],
         // 'lang'=>$_SESSION[admin_lang],
         // "img" => fileimg("banner",TABLE_NAME),
     ];
